@@ -135,5 +135,6 @@ const ProfilePic = styled.img`
     height: 65px;
     width: 65px;
     border-radius: 50%;
+    margin-right: 20px;
     object-fit: cover;
 `;

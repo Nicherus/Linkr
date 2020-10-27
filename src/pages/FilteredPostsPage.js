@@ -19,15 +19,15 @@ export default function FilteredPostsPage() {
   const { state } = useLocation();
 
   const [posts, setPosts] = useState([]);
-  const [hashtag, setHashtag] = useState(params.hashtag);
+  const [hashtag] = useState(params.hashtag);
   const [isMyPosts, setIsMyPosts] = useState(false);
 
   const offset = 0;
-  const limit = 10;
+  const limit = 15;
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [params.hashtag]);
 
   const fetchPosts = () => {
     if(params.id){
@@ -63,7 +63,7 @@ export default function FilteredPostsPage() {
     setIsLoading(true);
     try {
       const { data } = await axios.get(
-        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/hashtags/${hashtag}/posts?offset=${offset}&limit=${limit}`,
+        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/hashtags/${params.hashtag}/posts?offset=${offset}&limit=${limit}`,
         {
           headers: {
             "user-token": `${token}`,
@@ -84,7 +84,7 @@ export default function FilteredPostsPage() {
       <Header />
       <MainContainer>
         <MainTitle>
-          {isMyPosts? 'My Posts' : hashtag? `#${hashtag}` : `${state && state.userName}'s posts`}
+          {isMyPosts? 'My Posts' : params.hashtag? `#${params.hashtag}` : `${state && state.userName}'s posts`}
         </MainTitle>
         <ContentContainer>
           <PostsSectionContainer>
