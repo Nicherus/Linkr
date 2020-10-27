@@ -3,11 +3,33 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export default function SinglePost({ post }) {
-  const replaceHashOnText = () => {
-    return post.text.split(" ").map((word) => {
+  const replaceHashOnText = (post) => {
+    return post.text.split(" ").map((word, i) => {
       if (word.charAt(0) === "#") {
+        const wordMinusHash = word.slice(1);
+        if (word.includes(",")) {
+          const newWordArr = word.split(",");
+          return newWordArr.map((word, j) => (
+            <StyledLink key={j} to={`/hashtag/${word.slice(1)}`}>
+              {" "}
+              {word}
+            </StyledLink>
+          ));
+        }
+        if (wordMinusHash.includes("#")) {
+          const newWordArr = word.split("#");
+          return newWordArr.map((word, k) => (
+            <StyledLink key={k} to={`/hashtag/${word}`}>
+              {" "}
+              #{word}
+            </StyledLink>
+          ));
+        }
         return (
-          <StyledLink to={`/hashtag/${word.slice(1)}`}> {word}</StyledLink>
+          <StyledLink key={i} to={`/hashtag/${word.slice(1)}`}>
+            {" "}
+            {word}
+          </StyledLink>
         );
       }
       return ` ${word} `;
@@ -17,13 +39,18 @@ export default function SinglePost({ post }) {
   return (
     <PostContainer>
       <UserInfoContainer>
-        <Link to={`user/${post.user.id}`}>
+        <Link
+          to={{
+            pathname: `user/${post.user.id}`,
+            state: { userPicture: post.user.avatar },
+          }}
+        >
           <ProfilePicture src={post.user.avatar} alt="profile" />
         </Link>
       </UserInfoContainer>
       <PostContentContainer>
         <h3>{post.user.username}</h3>
-        <p>{replaceHashOnText()}</p>
+        <p>{replaceHashOnText(post)}</p>
         <PreviewContainer>
           <PreviewInfoContainer>
             <h3>{post.linkTitle}</h3>

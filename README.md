@@ -54,8 +54,8 @@
     - [x] Caso o servidor retorne algum erro, deve ser exibida uma mensagem de "Houve uma falha ao obter os posts, por favor atualize a página"
     - [x] Caso o servidor retorne uma lista vazia de posts, deve ser exibida uma mensagem de "Nenhum post encontrado"
   - Trending
-    - [ ] Ao entrar na tela, deve-se carregar a lista de hashtags populares do servidor e exibida conforme layout
-    - [ ] Ao clicar em uma hashtag, o usuário deve ser redirecionado para a rota "/hashtag/:hashtag" em que :hashtag é o nome da hashtag (sem #)
+    - [x] Ao entrar na tela, deve-se carregar a lista de hashtags populares do servidor e exibida conforme layout
+    - [x] Ao clicar em uma hashtag, o usuário deve ser redirecionado para a rota "/hashtag/:hashtag" em que :hashtag é o nome da hashtag (sem #)
 - Post
 
   - [x] Ao clicar na foto ou nome do usuário que publicou um post, o usuário deve ser redirecionado para a página "/user/:id" em que :id é o id do usuário

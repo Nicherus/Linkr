@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function HashtagsContainer({ token }) {
@@ -10,11 +11,13 @@ export default function HashtagsContainer({ token }) {
 
   const fetchTrendingHashtags = async () => {
     try {
-      const resp = await axios.get(
+      const {
+        data,
+      } = await axios.get(
         "https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/hashtags/trending",
         { headers: { "user-token": token } }
       );
-      console.log(resp);
+      setTrendingHashtags([...data.hashtags]);
     } catch (error) {
       console.error(error);
     }
@@ -25,16 +28,11 @@ export default function HashtagsContainer({ token }) {
       <h2>trending</h2>
       <div />
       <ul>
-        <li># javascript</li>
-        <li># react</li>
-        <li># javascript</li>
-        <li># react</li>
-        <li># javascript</li>
-        <li># react</li>
-        <li># javascript</li>
-        <li># react</li>
-        <li># javascript</li>
-        <li># react</li>
+        {trendingHashtags.map((hash) => (
+          <Link to={`/hashtag/${hash.name}`}>
+            <li># {hash.name}</li>
+          </Link>
+        ))}
       </ul>
     </HashtagsContent>
   );
