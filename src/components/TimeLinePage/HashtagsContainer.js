@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import styled from "styled-components";
 
-export default function HashtagsContainer() {
+export default function HashtagsContainer({ token }) {
+  const [trendingHashtags, setTrendingHashtags] = useState([]);
+  useEffect(() => {
+    fetchTrendingHashtags();
+  }, []);
+
+  const fetchTrendingHashtags = async () => {
+    try {
+      const resp = await axios.get(
+        "https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/hashtags/trending",
+        { headers: { "user-token": token } }
+      );
+      console.log(resp);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <HashtagsContent>
       <h2>trending</h2>

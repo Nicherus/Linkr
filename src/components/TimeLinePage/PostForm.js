@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import UserContext from "../../contexts/UserContext";
 
-export default function PostForm({ userPicture }) {
+export default function PostForm({ userPicture, setRefresh, refresh }) {
   const [link, setLink] = useState("");
   const [text, setText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -30,6 +30,7 @@ export default function PostForm({ userPicture }) {
         }
       );
       console.log("enviado com sucesso");
+      setRefresh(!refresh);
       setLink("");
       setText("");
     } catch (error) {

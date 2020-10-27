@@ -12,11 +12,12 @@ import Spinner from "../components/common/Spinner";
 export default function TimeLinePage() {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [refresh, setRefresh] = useState(false);
   const { user, token } = useContext(UserContext);
 
   useEffect(() => {
     fetchPostsTimeline();
-  }, []);
+  }, [refresh]);
 
   const fetchPostsTimeline = async () => {
     let offset = 0;
@@ -47,7 +48,11 @@ export default function TimeLinePage() {
         <MainTitle>timeline</MainTitle>
         <ContentContainer>
           <PostsSectionContainer>
-            <PostForm userPicture={user.avatar} />
+            <PostForm
+              userPicture={user.avatar}
+              setRefresh={setRefresh}
+              refresh={refresh}
+            />
             {isLoading ? (
               <Spinner />
             ) : posts.length === 0 ? (
@@ -56,7 +61,7 @@ export default function TimeLinePage() {
               posts.map((post) => <SinglePost key={post.id} post={post} />)
             )}
           </PostsSectionContainer>
-          <HashtagsContainer />
+          <HashtagsContainer token={token} />
         </ContentContainer>
       </MainContainer>
     </>
