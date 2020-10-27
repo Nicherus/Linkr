@@ -3,9 +3,8 @@ import { useHistory } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
 import { Link } from 'react-router-dom';
 
-import styled, { withTheme } from 'styled-components';
-import { IoIosArrowBack } from 'react-icons/io';
-import { IoIosArrowForward } from 'react-icons/io';
+import styled from 'styled-components';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 
 export default function Header(){

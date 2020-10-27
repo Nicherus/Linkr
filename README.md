@@ -67,10 +67,10 @@
 
 - Telas de post filtrados (rotas "/my-posts", "/hashtag/:hashtag", "/user/:id")
 
-  - [ ] Devem ser exatamente com a página timeline, mudando somente:
-    - [ ] A caixa de publicação não deve aparecer
-    - [ ] O título deve mudar de "timeline" para "**my posts**" / "**#hashtag**" / "**Juvenal's posts**" conforme layout
-    - [ ] Os posts carregados devem ser obtidos das rotas da API correspondentes
+  - [x] Devem ser exatamente com a página timeline, mudando somente:
+    - [x] A caixa de publicação não deve aparecer
+    - [x] O título deve mudar de "timeline" para "**my posts**" / "**#hashtag**" / "**Juvenal's posts**" conforme layout
+    - [x] Os posts carregados devem ser obtidos das rotas da API correspondentes
 
 - Deploy
   - [ ] Coloque seu projeto no ar usando o GitHub Pages
