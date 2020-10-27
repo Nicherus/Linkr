@@ -49,10 +49,10 @@
     - [x] Em caso de erro no envio, deve ser exibida uma mensagem de "Houve um erro ao publicar seu link" e os campos e botões devem voltar a ser habilitados
     - [ ] Em caso de sucesso no envio, os campos e botões devem ser re-habilitados, os campos devem ser limpos e a lista de posts da timeline deve ser atualizada para conter a nova publicação
   - Lista de Posts
-    - [ ] Ao entrar na tela, deve-se carregar a lista de posts do servidor e exibida conforme layout
-    - [ ] Enquanto a lista é carregada, deve-se exibir uma mensagem de "Loading" na área em que aparecem os posts. Pesquise por gifs animados de loading para ilustrar.
-    - [ ] Caso o servidor retorne algum erro, deve ser exibida uma mensagem de "Houve uma falha ao obter os posts, por favor atualize a página"
-    - [ ] Caso o servidor retorne uma lista vazia de posts, deve ser exibida uma mensagem de "Nenhum post encontrado"
+    - [x] Ao entrar na tela, deve-se carregar a lista de posts do servidor e exibida conforme layout
+    - [x] Enquanto a lista é carregada, deve-se exibir uma mensagem de "Loading" na área em que aparecem os posts. Pesquise por gifs animados de loading para ilustrar.
+    - [x] Caso o servidor retorne algum erro, deve ser exibida uma mensagem de "Houve uma falha ao obter os posts, por favor atualize a página"
+    - [x] Caso o servidor retorne uma lista vazia de posts, deve ser exibida uma mensagem de "Nenhum post encontrado"
   - Trending
     - [ ] Ao entrar na tela, deve-se carregar a lista de hashtags populares do servidor e exibida conforme layout
     - [ ] Ao clicar em uma hashtag, o usuário deve ser redirecionado para a rota "/hashtag/:hashtag" em que :hashtag é o nome da hashtag (sem #)
@@ -63,7 +63,7 @@
 
     **Dica**: Pesquise por uma biblioteca chamada **react-hashtag**
 
-  - [ ] Ao clicar no snippet do link compartilhado, o link deve abrir em uma nova aba
+  - [x] Ao clicar no snippet do link compartilhado, o link deve abrir em uma nova aba
 
 - Telas de post filtrados (rotas "/my-posts", "/hashtag/:hashtag", "/user/:id")
 

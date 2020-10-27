@@ -5,7 +5,7 @@ import { createGlobalStyle } from "styled-components";
 import "./reset.css";
 import LoginPage from "./pages/LoginPage";
 import TimeLinePage from "./pages/TimeLinePage";
-import { UserContextProvider } from './contexts/UserContext';
+import { UserContextProvider } from "./contexts/UserContext";
 
 function App() {
   return (

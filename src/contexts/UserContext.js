@@ -48,26 +48,6 @@ export const UserContextProvider = (props) => {
     }
   };
 
-  const getPostsTimeline = async (body) => {
-    try {
-      const { data } = await axios.get(
-        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts?offset=${offset}&limit=${limit}`,
-        body,
-        {
-          headers: {
-            "user-token": `${token}`,
-          },
-        }
-      );
-      if (data) {
-        return data;
-      }
-    } catch (error) {
-      alert(error.response.data.message);
-      return null;
-    }
-  };
-
   const getPostsByUser = async (body) => {
     try {
       const { data } = await axios.get(
@@ -121,7 +101,6 @@ export const UserContextProvider = (props) => {
         signIn,
         signUp,
         user,
-        getPostsTimeline,
         getPostsByUser,
         getPostsByHashtag,
         clearData,

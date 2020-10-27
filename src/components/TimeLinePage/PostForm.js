@@ -68,11 +68,13 @@ export default function PostForm({ userPicture }) {
 }
 
 const PublishPostContainer = styled.section`
+  width: 100%;
   background: white;
   padding: 15px;
   display: flex;
   justify-content: space-between;
   border-radius: 16px;
+  margin-bottom: 10px;
 `;
 
 const PostFormContainer = styled.form`

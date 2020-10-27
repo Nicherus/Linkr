@@ -24,6 +24,7 @@ export default function HashtagsContainer() {
 
 const HashtagsContent = styled.section`
   width: 32%;
+  height: 100%;
   background: var(--backgroundBlack);
   border-radius: 10px;
   color: white;
