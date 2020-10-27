@@ -1,13 +1,56 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function SinglePost({ post }) {
+  const replaceHashOnText = (post) => {
+    return post.text.split(" ").map((word, i) => {
+      if (word.charAt(0) === "#") {
+        const wordMinusHash = word.slice(1);
+        if (word.includes(",")) {
+          const newWordArr = word.split(",");
+          return newWordArr.map((word, j) => (
+            <StyledLink key={j} to={`/hashtag/${word.slice(1)}`}>
+              {" "}
+              {word}
+            </StyledLink>
+          ));
+        }
+        if (wordMinusHash.includes("#")) {
+          const newWordArr = word.split("#");
+          return newWordArr.map((word, k) => (
+            <StyledLink key={k} to={`/hashtag/${word}`}>
+              {" "}
+              #{word}
+            </StyledLink>
+          ));
+        }
+        return (
+          <StyledLink key={i} to={`/hashtag/${word.slice(1)}`}>
+            {" "}
+            {word}
+          </StyledLink>
+        );
+      }
+      return ` ${word} `;
+    });
+  };
+
   return (
     <PostContainer>
-      <ProfilePicture src={post.user.avatar} alt="profile" />
+      <UserInfoContainer>
+        <Link
+          to={{
+            pathname: `user/${post.user.id}`,
+            state: { userPicture: post.user.avatar },
+          }}
+        >
+          <ProfilePicture src={post.user.avatar} alt="profile" />
+        </Link>
+      </UserInfoContainer>
       <PostContentContainer>
         <h3>{post.user.username}</h3>
-        <p>{post.text}</p>
+        <p>{replaceHashOnText(post)}</p>
         <PreviewContainer>
           <PreviewInfoContainer>
             <h3>{post.linkTitle}</h3>
@@ -30,6 +73,7 @@ const PostContainer = styled.article`
   justify-content: space-between;
   border-radius: 16px;
   margin-top: 20px;
+  width: 100%;
 `;
 
 const PostContentContainer = styled.div`
@@ -44,9 +88,13 @@ const PostContentContainer = styled.div`
     margin-bottom: 10px;
   }
   p {
-    color: #cecece;
+    color: #b7b7b7;
     font-size: 17px;
   }
+`;
+
+const UserInfoContainer = styled.div`
+  width: 20%;
 `;
 
 const ProfilePicture = styled.img`
@@ -56,8 +104,26 @@ const ProfilePicture = styled.img`
   margin-right: 15px;
 `;
 
+const PreviewContainer = styled.div`
+  width: 100%;
+  margin-top: 20px;
+  border: 1px solid #4d4d4d;
+  border-radius: 16px;
+  height: 155px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  img {
+    display: block;
+    width: 30%;
+    height: 100%;
+  }
+`;
+
 const PreviewInfoContainer = styled.div`
   padding: 20px;
+  width: 68%;
   h3 {
     font-size: 16px;
   }
@@ -72,18 +138,7 @@ const PreviewInfoContainer = styled.div`
   }
 `;
 
-const PreviewContainer = styled.div`
-  margin-top: 20px;
-  border: 1px solid #4d4d4d;
-  border-radius: 16px;
-  height: 155px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  overflow: hidden;
-  img {
-    display: block;
-    width: 30%;
-    height: 100%;
-  }
+const StyledLink = styled(Link)`
+  color: white;
+  font-weight: bold;
 `;

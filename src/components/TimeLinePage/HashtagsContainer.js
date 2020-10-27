@@ -1,22 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export default function HashtagsContainer() {
+export default function HashtagsContainer({ token }) {
+  const [trendingHashtags, setTrendingHashtags] = useState([]);
+  useEffect(() => {
+    fetchTrendingHashtags();
+  }, []);
+
+  const fetchTrendingHashtags = async () => {
+    try {
+      const {
+        data,
+      } = await axios.get(
+        "https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/hashtags/trending",
+        { headers: { "user-token": token } }
+      );
+      setTrendingHashtags([...data.hashtags]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <HashtagsContent>
       <h2>trending</h2>
       <div />
       <ul>
-        <li># javascript</li>
-        <li># react</li>
-        <li># javascript</li>
-        <li># react</li>
-        <li># javascript</li>
-        <li># react</li>
-        <li># javascript</li>
-        <li># react</li>
-        <li># javascript</li>
-        <li># react</li>
+        {trendingHashtags.map((hash) => (
+          <Link to={`/hashtag/${hash.name}`}>
+            <li># {hash.name}</li>
+          </Link>
+        ))}
       </ul>
     </HashtagsContent>
   );
