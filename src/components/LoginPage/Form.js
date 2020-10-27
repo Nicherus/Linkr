@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from 'react-router-dom';
-import UserContext from '../../contexts/UserContext';
+import { useHistory } from "react-router-dom";
+import UserContext from "../../contexts/UserContext";
 import styled from "styled-components";
+import Spinner from "../common/Spinner";
 
 export default function Form({ formState, handleChangeFormState }) {
-  const {signIn, signUp} = useContext(UserContext);
+  const { signIn, signUp } = useContext(UserContext);
   let history = useHistory();
 
   const [email, setEmail] = useState("");
@@ -14,42 +15,58 @@ export default function Form({ formState, handleChangeFormState }) {
   const [loading, setLoading] = useState(false);
 
   const sendLoginInfo = async (e) => {
-    setLoading(true);
     e.preventDefault();
-    const data = await signIn({
-      'email': email,
-      'password': password,
-    })
-
-    if(data){
-      console.log(data);
-      history.push('/timeline');
-    } else{
-      console.log('erro');
+    if (email.length === 0 || password.length === 0) {
+      alert("Preencha todos os campos");
+      return;
     }
-    setLoading(false);
+    setLoading(true);
+    const data = await signIn({
+      email: email,
+      password: password,
+    });
+
+    if (data) {
+      history.push("/timeline");
+      setLoading(false);
+    } else {
+      console.log("erro");
+      setLoading(false);
+    }
   };
 
   const registerUser = async (e) => {
-    setLoading(true);
     e.preventDefault();
-    const data = await signUp({
-      'email': email,
-      'password': password,
-      'username': username,
-      'pictureUrl': pictureUrl,
-    })
-
-    if(data){
-      console.log(data);
-      history.push('/timeline');
-    } else{
-      console.log('erro');
+    if (
+      email.length === 0 ||
+      password.length === 0 ||
+      username.length === 0 ||
+      pictureUrl === 0
+    ) {
+      alert("Preencha todos os campos");
+      return;
     }
-    setLoading(false);
+    setLoading(true);
+    const data = await signUp({
+      email: email,
+      password: password,
+      username: username,
+      pictureUrl: pictureUrl,
+    });
+
+    if (data) {
+      console.log(data);
+      history.push("/timeline");
+      setLoading(false);
+    } else {
+      console.log("erro");
+      setLoading(false);
+    }
   };
 
   const login = formState === "login";
+
+  if (loading) return <Spinner />;
 
   return (
     <FormContainer onSubmit={login ? sendLoginInfo : registerUser}>
@@ -81,7 +98,9 @@ export default function Form({ formState, handleChangeFormState }) {
           />
         </>
       )}
-      <Button disabled={loading} type="submit">{login ? "Log In" : "Sign Up"}</Button>
+      <Button disabled={loading} type="submit">
+        {login ? "Log In" : "Sign Up"}
+      </Button>
       <ChangeFormButton onClick={handleChangeFormState}>
         {login ? "First time? Create an account!" : "Switch back to log in"}
       </ChangeFormButton>
