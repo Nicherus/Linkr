@@ -3,15 +3,15 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export default function SinglePost({ post }) {
-  const textWhitoutHashtags = (post) => {
-    return post.text
-      .split(" ")
-      .filter((word) => word.charAt(0) !== "#")
-      .join(" ");
-  };
-
-  const hashtagsArray = (post) => {
-    return post.text.split(" ").filter((word) => word.charAt(0) === "#");
+  const replaceHashOnText = () => {
+    return post.text.split(" ").map((word) => {
+      if (word.charAt(0) === "#") {
+        return (
+          <StyledLink to={`/hashtag/${word.slice(1)}`}> {word}</StyledLink>
+        );
+      }
+      return ` ${word} `;
+    });
   };
 
   return (
@@ -23,12 +23,7 @@ export default function SinglePost({ post }) {
       </UserInfoContainer>
       <PostContentContainer>
         <h3>{post.user.username}</h3>
-        <p>
-          {textWhitoutHashtags(post)}{" "}
-          {hashtagsArray(post).map((hash) => (
-            <StyledLink to={`/hashtag/${hash.slice(1)}`}>{hash}</StyledLink>
-          ))}
-        </p>
+        <p>{replaceHashOnText()}</p>
         <PreviewContainer>
           <PreviewInfoContainer>
             <h3>{post.linkTitle}</h3>
