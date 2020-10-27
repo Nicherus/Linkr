@@ -1,20 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useHistory } from 'react-router-dom';
+import UserContext from '../../contexts/UserContext';
 import styled from "styled-components";
 
 export default function Form({ formState, handleChangeFormState }) {
+  const {signIn, signUp} = useContext(UserContext);
+  let history = useHistory();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [pictureUrl, setPictureUrl] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const sendLoginInfo = (e) => {
+  const sendLoginInfo = async (e) => {
+    setLoading(true);
     e.preventDefault();
-    console.log("Logging in");
+    const data = await signIn({
+      'email': email,
+      'password': password,
+    })
+
+    if(data){
+      console.log(data);
+      history.push('/timeline');
+    } else{
+      alert('Ops! Não foi possível logar no momento, verifique seus dados e/ou tente novamente mais tarde.');
+    }
+    setLoading(false);
   };
 
-  const registerUser = (e) => {
+  const registerUser = async (e) => {
+    setLoading(true);
     e.preventDefault();
-    console.log("registering");
+    const data = await signUp({
+      'email': email,
+      'password': password,
+      'username': username,
+      'pictureUrl': pictureUrl,
+    })
+
+    if(data){
+      console.log(data);
+      history.push('/timeline');
+    } else{
+      alert('Ops! Não foi possível cadastrar um usuário no momento, verifique seus dados e/ou tente novamente mais tarde.');
+    }
+    setLoading(false);
   };
 
   const login = formState === "login";
@@ -49,7 +81,7 @@ export default function Form({ formState, handleChangeFormState }) {
           />
         </>
       )}
-      <Button type="submit">{login ? "Log In" : "Sign Up"}</Button>
+      <Button disabled={loading} type="submit">{login ? "Log In" : "Sign Up"}</Button>
       <ChangeFormButton onClick={handleChangeFormState}>
         {login ? "First time? Create an account!" : "Switch back to log in"}
       </ChangeFormButton>

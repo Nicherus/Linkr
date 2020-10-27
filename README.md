@@ -1,45 +1,45 @@
 # Requisitos
 
 - Geral
-    - [ ]  Manipule o HTML usando somente React (sem usar o document nem bibliotecas como jQuery)
-    - [ ]  Seu projeto deverá ser desenvolvido utilizando Git e GitHub
-    - [ ]  Para isso, crie um repositório público no seu GitHub e compartilhe acesso com sua dupla
-    - [ ]  **A cada requisito implementado** faça um commit com uma mensagem descritiva do que você evoluiu. Caso queira dividir um requisito em vários commits, não há problema. Mas evite colocar mais de um requisito no mesmo commit
+    - [X]  Manipule o HTML usando somente React (sem usar o document nem bibliotecas como jQuery)
+    - [X]  Seu projeto deverá ser desenvolvido utilizando Git e GitHub
+    - [X]  Para isso, crie um repositório público no seu GitHub e compartilhe acesso com sua dupla
+    - [X]  **A cada requisito implementado** faça um commit com uma mensagem descritiva do que você evoluiu. Caso queira dividir um requisito em vários commits, não há problema. Mas evite colocar mais de um requisito no mesmo commit
 - Layout
-    - [ ]  Aplicar layout para desktop, seguindo imagens fornecidas
-    - [ ]  Aplicar layout para mobile, seguindo imagens fornecidas
-    - [ ]  Fontes e cores devem ser extraídas do Figma: [https://www.figma.com/file/PzDjhf1EyeZ0opdDnhLmwJ/linkr?node-id=0%3A1](https://www.figma.com/file/PzDjhf1EyeZ0opdDnhLmwJ/linkr?node-id=0%3A1) (crie uma conta no Figma e se logue para ter acesso ao Inspect)
-    - [ ]  Tamanhos/posicionamento podem ser aproximados, não é necessário copiar o Figma (não recomendado!)
-    - [ ]  Para ícones, utilize a biblioteca **react-icons**
+    - [-]  Aplicar layout para desktop, seguindo imagens fornecidas
+    - [-]  Aplicar layout para mobile, seguindo imagens fornecidas
+    - [X]  Fontes e cores devem ser extraídas do Figma: [https://www.figma.com/file/PzDjhf1EyeZ0opdDnhLmwJ/linkr?node-id=0%3A1](https://www.figma.com/file/PzDjhf1EyeZ0opdDnhLmwJ/linkr?node-id=0%3A1) (crie uma conta no Figma e se logue para ter acesso ao Inspect)
+    - [X]  Tamanhos/posicionamento podem ser aproximados, não é necessário copiar o Figma (não recomendado!)
+    - [X]  Para ícones, utilize a biblioteca **react-icons**
 - Tela de Login (rota "/")
     - Login
-        - [ ]  Ao clicar em entrar, caso algum dos campos esteja vazio, deverá aparecer um alert solicitando o preenchimento dos campos
-        - [ ]  Ao clicar em entrar, caso os campos estejam preenchidos, deverá ser enviado um request `post` para o servidor, seguindo documentação
-        - [ ]  Caso o servidor retorne uma falha (status 401), deverá ser lançado um alert para o usuário de email/senha incorretos
-        - [ ]  Caso o servidor retorne sucesso (status 200), o usuário deve ser redirecionado para a rota "/timeline"
-        - [ ]  Em caso de sucesso, o servidor retornará na resposta também um código identificador do usuário que você deve **guardar** para usar nos próximos requests pro servidor, assim como dados sobre usuário (como nome e foto)
-        - [ ]  Ao clicar em entrar, o botão deve ser desabilitado até o servidor responder, evitando que o usuário clique no botão várias vezes
-        - [ ]  Ao clicar em "First time? Create an account!", os campos devem mudar pro formato da tela 2
+        - [X]  Ao clicar em entrar, caso algum dos campos esteja vazio, deverá aparecer um alert solicitando o preenchimento dos campos
+        - [X]  Ao clicar em entrar, caso os campos estejam preenchidos, deverá ser enviado um request `post` para o servidor, seguindo documentação
+        - [X]  Caso o servidor retorne uma falha (status 401), deverá ser lançado um alert para o usuário de email/senha incorretos
+        - [X]  Caso o servidor retorne sucesso (status 200), o usuário deve ser redirecionado para a rota "/timeline"
+        - [X]  Em caso de sucesso, o servidor retornará na resposta também um código identificador do usuário que você deve **guardar** para usar nos próximos requests pro servidor, assim como dados sobre usuário (como nome e foto)
+        - [X]  Ao clicar em entrar, o botão deve ser desabilitado até o servidor responder, evitando que o usuário clique no botão várias vezes
+        - [X]  Ao clicar em "First time? Create an account!", os campos devem mudar pro formato da tela 2
     - Cadastro
-        - [ ]  Ao clicar em cadastrar, caso algum dos campos esteja vazio, deverá aparecer um alert solicitando o preenchimento dos campos
-        - [ ]  Ao clicar em entrar, caso os campos estejam preenchidos, deverá ser enviado um request `post` para o servidor, seguindo documentação
-        - [ ]  Caso o servidor retorne uma falha (status 400), deverá ser lançado um alert para o usuário informando que o email inserido já está cadastrado
-        - [ ]  Caso o servidor retorne sucesso (status 201), o usuário deve ser redirecionado para a rota "/timeline"
-        - [ ]  Em caso de sucesso, o servidor retornará na resposta também um código identificador do usuário que você deve **guardar** para usar nos próximos requests pro servidor, assim como dados sobre usuário (como nome e foto)
-        - [ ]  Ao clicar em cadastrar, o botão deve ser desabilitado até o servidor responder, evitando que o usuário clique no botão várias vezes
-        - [ ]  Ao clicar em "Switch back to Log In", os campos devem mudar pro formato da tela 1
+        - [X]  Ao clicar em cadastrar, caso algum dos campos esteja vazio, deverá aparecer um alert solicitando o preenchimento dos campos
+        - [X]  Ao clicar em entrar, caso os campos estejam preenchidos, deverá ser enviado um request `post` para o servidor, seguindo documentação
+        - [X]  Caso o servidor retorne uma falha (status 400), deverá ser lançado um alert para o usuário informando que o email inserido já está cadastrado
+        - [X]  Caso o servidor retorne sucesso (status 201), o usuário deve ser redirecionado para a rota "/timeline"
+        - [X]  Em caso de sucesso, o servidor retornará na resposta também um código identificador do usuário que você deve **guardar** para usar nos próximos requests pro servidor, assim como dados sobre usuário (como nome e foto)
+        - [X]  Ao clicar em cadastrar, o botão deve ser desabilitado até o servidor responder, evitando que o usuário clique no botão várias vezes
+        - [X]  Ao clicar em "Switch back to Log In", os campos devem mudar pro formato da tela 1
     - Autenticação
-        - [ ]  A partir da próxima tela, todos os requests para o servidor devem incluir um **header** de nome `User-Token`, contendo o valor retornado pelo servidor no request de autenticação (que você guardou nos requisitos anteriores)
+        - [X]  A partir da próxima tela, todos os requests para o servidor devem incluir um **header** de nome `User-Token`, contendo o valor retornado pelo servidor no request de autenticação (que você guardou nos requisitos anteriores)
 
             Dica: pesquise por "add header axios" 
 
 - Tela de Timeline (rota "/timeline")
     - Topo
-        - [ ]  Implementar topo como especificado no layout. O topo deve ser fixo.
-        - [ ]  Ao clicar na seta/foto do usuário, deve abrir um menu conforme layout e seta deve virar para cima
-        - [ ]  Ao clicar novamente, deve-se fechar o menu e virar a seta novamente pra baixo
+        - [x]  Implementar topo como especificado no layout. O topo deve ser fixo.
+        - [-]  Ao clicar na seta/foto do usuário, deve abrir um menu conforme layout e seta deve virar para cima
+        - [-]  Ao clicar novamente, deve-se fechar o menu e virar a seta novamente pra baixo
         - [ ]  Ao clicar em "My posts", o usuário deve ser redirecionado para a rota "/my-posts"
-        - [ ]  Ao clicar em "Logout", o usuário deve ser redirecionado novamente para a rota de login ("/") e os dados de usuário logado devem ser resetados no front
+        - [-]  Ao clicar em "Logout", o usuário deve ser redirecionado novamente para a rota de login ("/") e os dados de usuário logado devem ser resetados no front
     - Publicação
         - [ ]  Ao clicar em "Publish", deve ser validado se o usuário preencheu o link (o texto é opcional)
         - [ ]  Ao clicar em "Publish", deve ser enviado um post para o servidor com os dados inseridos

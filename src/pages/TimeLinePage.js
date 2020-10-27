@@ -1,5 +1,8 @@
 import React from "react";
+import Header from '../components/ui/Header'
 
 export default function TimeLinePage() {
-  return <div>TimeLinePage</div>;
+  return(
+    <Header />
+  )
 }
