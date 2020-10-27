@@ -42,7 +42,7 @@ export default function SinglePost({ post }) {
         <Link
           to={{
             pathname: `user/${post.user.id}`,
-            state: { userPicture: post.user.avatar },
+            state: { userName: post.user.username },
           }}
         >
           <ProfilePicture src={post.user.avatar} alt="profile" />

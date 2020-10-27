@@ -3,7 +3,9 @@ import axios from "axios";
 import { useParams } from 'react-router-dom';
 import styled from "styled-components";
 
+
 import Header from "../components/ui/Header";
+import { useLocation } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
 import HashtagsContainer from "../components/TimeLinePage/HashtagsContainer";
 import SinglePost from "../components/TimeLinePage/SinglePost";
@@ -14,6 +16,7 @@ export default function FilteredPostsPage() {
   const { user, token } = useContext(UserContext); 
   // const token = '2dff901b-4dd4-44cb-8ab6-8d242c00d2d0'; //debugging
   const params = useParams();
+  const { state } = useLocation();
 
   const [posts, setPosts] = useState([]);
   const [hashtag, setHashtag] = useState(params.hashtag);
@@ -27,16 +30,14 @@ export default function FilteredPostsPage() {
   }, []);
 
   const fetchPosts = () => {
-    return (
-      params.id? 
-      fetchPostsByUser() 
-      : params.hashtag? 
-      fetchPostsByTag : 
-      (() => {
-        setIsMyPosts(true); 
-        fetchPostsByUser(true);
-      })
-    )
+    if(params.id){
+      fetchPostsByUser();
+    } else if(params.hashtag){
+      fetchPostsByTag(false);
+    } else{
+      setIsMyPosts(true);
+      fetchPostsByUser(true);
+    }
   }
 
   const fetchPostsByUser = async (userPost) => {
@@ -83,7 +84,7 @@ export default function FilteredPostsPage() {
       <Header />
       <MainContainer>
         <MainTitle>
-          {isMyPosts? 'My Posts' : hashtag? `#${hashtag}` : `${params.id}'s posts`}
+          {isMyPosts? 'My Posts' : hashtag? `#${hashtag}` : `${state && state.userName}'s posts`}
         </MainTitle>
         <ContentContainer>
           <PostsSectionContainer>
@@ -95,7 +96,7 @@ export default function FilteredPostsPage() {
               posts.map((post) => <SinglePost key={post.id} post={post} />)
             )}
           </PostsSectionContainer>
-          <HashtagsContainer />
+          <HashtagsContainer token={token}/>
         </ContentContainer>
       </MainContainer>
     </>
