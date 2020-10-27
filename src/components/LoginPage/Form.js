@@ -25,7 +25,7 @@ export default function Form({ formState, handleChangeFormState }) {
       console.log(data);
       history.push('/timeline');
     } else{
-      alert('Ops! Não foi possível logar no momento, verifique seus dados e/ou tente novamente mais tarde.');
+      console.log('erro');
     }
     setLoading(false);
   };
@@ -44,7 +44,7 @@ export default function Form({ formState, handleChangeFormState }) {
       console.log(data);
       history.push('/timeline');
     } else{
-      alert('Ops! Não foi possível cadastrar um usuário no momento, verifique seus dados e/ou tente novamente mais tarde.');
+      console.log('erro');
     }
     setLoading(false);
   };

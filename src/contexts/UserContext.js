@@ -28,7 +28,7 @@ export const UserContextProvider = (props) =>{
             }
         } catch(error) {
             alert(error.response.data.message);
-            return error;
+            return null;
         }
     };
 
@@ -45,7 +45,7 @@ export const UserContextProvider = (props) =>{
             }
         } catch(error) {
             alert(error.response.data.message);
-            return error;
+            return null;
         }
     };
 
@@ -62,8 +62,8 @@ export const UserContextProvider = (props) =>{
                 return data;
             }
         } catch (error) {
-            console.log(error)
-            return error;
+            alert(error.response.data.message);
+            return null;
         }
     };
 
@@ -80,8 +80,8 @@ export const UserContextProvider = (props) =>{
                 return data;
             }
         } catch (error) {
-            console.log(error)
-            return error;
+            alert(error.response.data.message);
+            return null;
         }
     };
 
@@ -99,8 +99,8 @@ export const UserContextProvider = (props) =>{
                 return data;
             }
         } catch (error) {
-            console.log(error)
-            return error;
+            alert(error.response.data.message);
+            return null;
         }
     };
 
@@ -118,8 +118,8 @@ export const UserContextProvider = (props) =>{
                 return data;
             }
         } catch (error) {
-            console.log(error)
-            return error;
+            alert(error.response.data.message);
+            return null;
         }
     };
 
