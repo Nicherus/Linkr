@@ -39,4 +39,6 @@ const GlobalStyle = createGlobalStyle`
 body {
   font-family: var(--fontOswald);
 }
+
+
 `;

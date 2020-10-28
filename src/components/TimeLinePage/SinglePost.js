@@ -74,27 +74,42 @@ const PostContainer = styled.article`
   border-radius: 16px;
   margin-top: 20px;
   width: 100%;
+  @media (max-width: 768px) {
+    border-radius: 0;
+    margin-top: 10px;
+  }
 `;
 
 const PostContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex-grow: 1;
+  width: 85%;
   font-family: var(--fontLato);
+  word-break: break-all;
+
   h3 {
     font-size: 19px;
     color: white;
     margin-bottom: 10px;
+    @media (max-width: 768px) {
+      font-size: 17px;
+    }
   }
   p {
     color: #b7b7b7;
     font-size: 17px;
+    @media (max-width: 768px) {
+      font-size: 15px;
+    }
   }
 `;
 
 const UserInfoContainer = styled.div`
-  width: 20%;
+  width: 15%;
+  @media (max-width: 768px) {
+    width: 10%;
+  }
 `;
 
 const ProfilePicture = styled.img`
@@ -102,6 +117,10 @@ const ProfilePicture = styled.img`
   width: 50px;
   border-radius: 50%;
   margin-right: 15px;
+  @media (max-width: 768px) {
+    height: 40px;
+    width: 40px;
+  }
 `;
 
 const PreviewContainer = styled.div`
@@ -118,6 +137,7 @@ const PreviewContainer = styled.div`
     display: block;
     width: 30%;
     height: 100%;
+    object-fit: cover;
   }
 `;
 
@@ -126,15 +146,24 @@ const PreviewInfoContainer = styled.div`
   width: 68%;
   h3 {
     font-size: 16px;
+    @media (max-width: 768px) {
+      font-size: 11px;
+    }
   }
   p {
     font-size: 11px;
+    @media (max-width: 768px) {
+      font-size: 9px;
+    }
   }
   a {
     display: inline-block;
     margin-top: 20px;
     font-size: 11px;
     color: #cecece;
+    @media (max-width: 768px) {
+      font-size: 9px;
+    }
   }
 `;
 

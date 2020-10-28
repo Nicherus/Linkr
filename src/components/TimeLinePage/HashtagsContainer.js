@@ -29,7 +29,7 @@ export default function HashtagsContainer({ token }) {
       <div />
       <ul>
         {trendingHashtags.map((hash) => (
-          <Link to={`/hashtag/${hash.name}`}>
+          <Link key={hash.name} to={`/hashtag/${hash.name}`}>
             <li># {hash.name}</li>
           </Link>
         ))}
@@ -45,6 +45,9 @@ const HashtagsContent = styled.section`
   border-radius: 10px;
   color: white;
   padding: 5px;
+  @media (max-width: 768px) {
+    display: none;
+  }
   h2 {
     font-family: var(--fontOswald);
     font-weight: bold;

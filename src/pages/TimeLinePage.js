@@ -75,6 +75,10 @@ const MainContainer = styled.main`
   min-height: 100vh;
   padding: 0 15%;
   padding-bottom: 50px;
+  @media (max-width: 768px) {
+    padding: 0 0 50px 0;
+    margin-top: 62px;
+  }
 `;
 
 const MainTitle = styled.h1`
@@ -83,6 +87,10 @@ const MainTitle = styled.h1`
   font-size: 43px;
   color: white;
   padding: 53px 0;
+  @media (max-width: 768px) {
+    padding: 20px 10px;
+    font-size: 33px;
+  }
 `;
 
 const ContentContainer = styled.section`
@@ -95,4 +103,7 @@ const PostsSectionContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;

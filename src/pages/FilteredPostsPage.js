@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
-
 
 import Header from "../components/ui/Header";
 import { useLocation } from "react-router-dom";
@@ -13,7 +12,7 @@ import Spinner from "../components/common/Spinner";
 
 export default function FilteredPostsPage() {
   const [isLoading, setIsLoading] = useState(false);
-  const { user, token } = useContext(UserContext); 
+  const { user, token } = useContext(UserContext);
   // const token = '2dff901b-4dd4-44cb-8ab6-8d242c00d2d0'; //debugging
   const params = useParams();
   const { state } = useLocation();
@@ -30,21 +29,23 @@ export default function FilteredPostsPage() {
   }, []);
 
   const fetchPosts = () => {
-    if(params.id){
+    if (params.id) {
       fetchPostsByUser();
-    } else if(params.hashtag){
+    } else if (params.hashtag) {
       fetchPostsByTag(false);
-    } else{
+    } else {
       setIsMyPosts(true);
       fetchPostsByUser(true);
     }
-  }
+  };
 
   const fetchPostsByUser = async (userPost) => {
     setIsLoading(true);
     try {
       const { data } = await axios.get(
-        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${userPost? user.id : params.id}/posts?offset=${offset}&limit=${limit}`,
+        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${
+          userPost ? user.id : params.id
+        }/posts?offset=${offset}&limit=${limit}`,
         {
           headers: {
             "user-token": `${token}`,
@@ -78,13 +79,16 @@ export default function FilteredPostsPage() {
     setIsLoading(false);
   };
 
-
   return (
     <>
       <Header />
       <MainContainer>
         <MainTitle>
-          {isMyPosts? 'My Posts' : hashtag? `#${hashtag}` : `${state && state.userName}'s posts`}
+          {isMyPosts
+            ? "My Posts"
+            : hashtag
+            ? `#${hashtag}`
+            : `${state && state.userName}'s posts`}
         </MainTitle>
         <ContentContainer>
           <PostsSectionContainer>
@@ -96,7 +100,7 @@ export default function FilteredPostsPage() {
               posts.map((post) => <SinglePost key={post.id} post={post} />)
             )}
           </PostsSectionContainer>
-          <HashtagsContainer token={token}/>
+          <HashtagsContainer token={token} />
         </ContentContainer>
       </MainContainer>
     </>
@@ -110,6 +114,13 @@ const MainContainer = styled.main`
   min-height: 100vh;
   padding: 0 15%;
   padding-bottom: 50px;
+  @media (max-width: 768px) {
+    margin-top: 62px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const MainTitle = styled.h1`
@@ -118,6 +129,10 @@ const MainTitle = styled.h1`
   font-size: 43px;
   color: white;
   padding: 53px 0;
+  @media (max-width: 768px) {
+    font-size: 33px;
+    padding: 20px 0;
+  }
 `;
 
 const ContentContainer = styled.section`
@@ -130,4 +145,7 @@ const PostsSectionContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;

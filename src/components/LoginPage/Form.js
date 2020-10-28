@@ -114,6 +114,9 @@ const FormContainer = styled.form`
   flex-direction: column;
   align-items: center;
   width: 85%;
+  @media (max-width: 768px) {
+    margin: 20px 0;
+  }
   input {
     width: 100%;
     outline: none;
@@ -121,11 +124,17 @@ const FormContainer = styled.form`
     border-radius: 5px;
     padding: 20px 10px;
     margin-bottom: 10px;
+    @media (max-width: 768px) {
+      padding: 15px 10px;
+    }
   }
   input::placeholder {
     color: #9f9f9f;
     font-weight: 700;
     font-size: 27px;
+    @media (max-width: 768px) {
+      font-size: 22px;
+    }
   }
 `;
 
@@ -140,6 +149,9 @@ const Button = styled.button`
   font-size: 27px;
   font-family: var(--fontOswald);
   font-weight: 700;
+  @media (max-width: 768px) {
+    font-size: 22px;
+  }
 `;
 
 const ChangeFormButton = styled.p`
@@ -148,4 +160,7 @@ const ChangeFormButton = styled.p`
   font-size: 20px;
   margin-top: 20px;
   cursor: pointer;
+  @media (max-width: 768px) {
+    font-size: 17px;
+  }
 `;

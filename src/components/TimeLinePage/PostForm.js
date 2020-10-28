@@ -76,6 +76,9 @@ const PublishPostContainer = styled.section`
   justify-content: space-between;
   border-radius: 16px;
   margin-bottom: 10px;
+  @media (max-width: 768px) {
+    border-radius: 0;
+  }
 `;
 
 const PostFormContainer = styled.form`
@@ -89,6 +92,9 @@ const PostFormContainer = styled.form`
     font-weight: 300;
     color: #707070;
     margin-bottom: 8px;
+    @media (max-width: 768px) {
+      font-size: 17px;
+    }
   }
   input,
   textarea {
@@ -108,6 +114,9 @@ const PostFormContainer = styled.form`
     font-family: var(--fontLato);
     font-weight: 300;
     font-size: 15px;
+    @media (max-width: 768px) {
+      font-size: 13px;
+    }
   }
 `;
 
@@ -116,10 +125,13 @@ const ProfilePicture = styled.img`
   width: 50px;
   border-radius: 50%;
   margin-right: 15px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Button = styled.button`
-  background: var(--buttonBlue);
+  background: ${(props) => (props.disabled ? "gray" : "#1877F2")};
   border-radius: 5px;
   width: 112px;
   border: none;
@@ -128,4 +140,7 @@ const Button = styled.button`
   padding: 5px 10px;
   align-self: flex-end;
   cursor: pointer;
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
