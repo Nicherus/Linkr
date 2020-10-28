@@ -84,15 +84,11 @@ export default function FilteredPostsPage() {
       <Header />
       <MainContainer>
         <MainTitle>
-<<<<<<< HEAD
           {isMyPosts
             ? "My Posts"
-            : hashtag
-            ? `#${hashtag}`
+            : params.hashtag
+            ? `#${params.hashtag}`
             : `${state && state.userName}'s posts`}
-=======
-          {isMyPosts? 'My Posts' : params.hashtag? `#${params.hashtag}` : `${state && state.userName}'s posts`}
->>>>>>> 66f1476c680da926150f4b58fed5cd92ffc8bb64
         </MainTitle>
         <ContentContainer>
           <PostsSectionContainer>
