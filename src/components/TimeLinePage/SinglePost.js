@@ -1,28 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
 import ReactTooltip from "react-tooltip";
+import axios from "axios";
 
 import replaceHashOnText from "../../utils/hashtagParser";
+import parseTooltipText from "../../utils/parseTooltipText";
+import UserContext from "../../contexts/UserContext";
 
 export default function SinglePost({ post }) {
-  const initialState = post.user.username === "plazzinga_";
+  const { user, token } = useContext(UserContext);
+  const initialState = post.likes.some((like) => like.userId === user.id);
   const [isLiked, setIsLiked] = useState(initialState);
+  const [likedArray, setLikedArray] = useState(post.likes);
 
   const likePost = async () => {
-    setIsLiked(!isLiked);
-    try {
-    } catch (error) {}
+    if (!isLiked) {
+      try {
+        const likeObj = { id: user.id, username: user.username };
+        const {
+          data,
+        } = await axios.post(
+          `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts/${post.id}/like`,
+          likeObj,
+          { headers: { "user-token": token } }
+        );
+        setLikedArray([...data.post.likes]);
+        setIsLiked(!isLiked);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      try {
+        const likeObj = { id: user.id, username: user.username };
+        const {
+          data,
+        } = await axios.post(
+          `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts/${post.id}/dislike`,
+          likeObj,
+          { headers: { "user-token": token } }
+        );
+        setIsLiked(!isLiked);
+        setLikedArray([...data.post.likes]);
+      } catch (error) {
+        console.error(error);
+      }
+    }
   };
-
-  // const parseTooltipText(post.likes) {
-  //   const likeNames = likesArray.map(like => like.name);
-  //   let newString = ""
-  //   if (isLiked) newString = `[array1], [array2] e outras [array.leght] pessoas`
-  //   else newString = `Voce, [array1] e outras [array.leght] pessoas `
-  //   return newString;
-  // }
 
   return (
     <PostContainer>
@@ -37,9 +62,15 @@ export default function SinglePost({ post }) {
         </Link>
         <ReactTooltip />
         {isLiked ? (
-          <FullHeartIcon onClick={likePost} data-tip="na espera da rota" />
+          <FullHeartIcon
+            onClick={likePost}
+            data-tip={parseTooltipText(likedArray, isLiked)}
+          />
         ) : (
-          <EmptyHeartIcon onClick={likePost} data-tip="na espera da rota" />
+          <EmptyHeartIcon
+            onClick={likePost}
+            data-tip={parseTooltipText(likedArray, isLiked)}
+          />
         )}
       </UserInfoContainer>
       <PostContentContainer>
@@ -113,11 +144,13 @@ const UserInfoContainer = styled.div`
 const EmptyHeartIcon = styled(IoIosHeartEmpty)`
   color: white;
   font-size: 24px;
+  cursor: pointer;
 `;
 
 const FullHeartIcon = styled(IoIosHeart)`
   color: red;
   font-size: 24px;
+  cursor: pointer;
 `;
 
 const ProfilePicture = styled.img`

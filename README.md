@@ -80,8 +80,8 @@
 - Funcionalidade de "Like"
 
   - [x] Adicione um botão de like nos posts, conforme layout
-  - [ ] Caso o usuário logado tenha dado like no post, o coração deve ser preenchido
-  - [ ] Ao passar o mouse sobre o número de likes, deve aparecer uma tooltip com a frase "Fulano, Beltrano e outras x pessoas" caso o usuário logado não tenha curtido ou "Você, Fulano e outras x pessoas" caso tenha curtido
+  - [x] Caso o usuário logado tenha dado like no post, o coração deve ser preenchido
+  - [x] Ao passar o mouse sobre o número de likes, deve aparecer uma tooltip com a frase "Fulano, Beltrano e outras x pessoas" caso o usuário logado não tenha curtido ou "Você, Fulano e outras x pessoas" caso tenha curtido
 
     Dica: Pesquise por uma biblioteca chamada **react-tooltip**
 

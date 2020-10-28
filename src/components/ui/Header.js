@@ -31,7 +31,6 @@ export default function Header() {
 
   return (
     <HeaderContainer>
-      {/* link here only for debugging purposes */}
       <Link to="/timeline">
         <LogoTitle>linkr</LogoTitle>
       </Link>
