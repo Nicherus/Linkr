@@ -79,13 +79,13 @@
 
 - Funcionalidade de "Like"
 
-  - [ ] Adicione um botão de like nos posts, conforme layout
+  - [x] Adicione um botão de like nos posts, conforme layout
   - [ ] Caso o usuário logado tenha dado like no post, o coração deve ser preenchido
   - [ ] Ao passar o mouse sobre o número de likes, deve aparecer uma tooltip com a frase "Fulano, Beltrano e outras x pessoas" caso o usuário logado não tenha curtido ou "Você, Fulano e outras x pessoas" caso tenha curtido
 
     Dica: Pesquise por uma biblioteca chamada **react-tooltip**
 
-  - [ ] Adicione mais um link no menu chamada "My likes" que redireciona o usuário para a rota "/my-likes"
+  - [x] Adicione mais um link no menu chamada "My likes" que redireciona o usuário para a rota "/my-likes"
   - [ ] Implemente a página "/my-likes" como mais uma página de posts filtrados
 
 - Campo para digitar hashtag
@@ -98,7 +98,7 @@
 
 - Animação para transitar entre as páginas
 
-  - [ ] Adicione uma animação de transição ao trocar de páginas (por exemplo, uma página sumir ao mesmo tempo que a próxima aparece)
+  - [x] Adicione uma animação de transição ao trocar de páginas (por exemplo, uma página sumir ao mesmo tempo que a próxima aparece)
 
     Dica: pesquise por uma biblioteca chamada **react-transition-group** e como utilizá-la em conjunto com o react-router
 

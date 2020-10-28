@@ -1,40 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
+import ReactTooltip from "react-tooltip";
+
+import replaceHashOnText from "../../utils/hashtagParser";
 
 export default function SinglePost({ post }) {
-  const replaceHashOnText = (post) => {
-    return post.text.split(" ").map((word, i) => {
-      if (word.charAt(0) === "#") {
-        const wordMinusHash = word.slice(1);
-        if (word.includes(",")) {
-          const newWordArr = word.split(",");
-          return newWordArr.map((word, j) => (
-            <StyledLink key={j} to={`/hashtag/${word.slice(1)}`}>
-              {" "}
-              {word}
-            </StyledLink>
-          ));
-        }
-        if (wordMinusHash.includes("#")) {
-          const newWordArr = word.split("#");
-          return newWordArr.map((word, k) => (
-            <StyledLink key={k} to={`/hashtag/${word}`}>
-              {" "}
-              #{word}
-            </StyledLink>
-          ));
-        }
-        return (
-          <StyledLink key={i} to={`/hashtag/${word.slice(1)}`}>
-            {" "}
-            {word}
-          </StyledLink>
-        );
-      }
-      return ` ${word} `;
-    });
+  const initialState = post.user.username === "plazzinga_";
+  const [isLiked, setIsLiked] = useState(initialState);
+
+  const likePost = async () => {
+    setIsLiked(!isLiked);
+    try {
+    } catch (error) {}
   };
+
+  // const parseTooltipText(post.likes) {
+  //   const likeNames = likesArray.map(like => like.name);
+  //   let newString = ""
+  //   if (isLiked) newString = `[array1], [array2] e outras [array.leght] pessoas`
+  //   else newString = `Voce, [array1] e outras [array.leght] pessoas `
+  //   return newString;
+  // }
 
   return (
     <PostContainer>
@@ -47,6 +35,12 @@ export default function SinglePost({ post }) {
         >
           <ProfilePicture src={post.user.avatar} alt="profile" />
         </Link>
+        <ReactTooltip />
+        {isLiked ? (
+          <FullHeartIcon onClick={likePost} data-tip="na espera da rota" />
+        ) : (
+          <EmptyHeartIcon onClick={likePost} data-tip="na espera da rota" />
+        )}
       </UserInfoContainer>
       <PostContentContainer>
         <h3>{post.user.username}</h3>
@@ -106,17 +100,31 @@ const PostContentContainer = styled.div`
 `;
 
 const UserInfoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   width: 15%;
+  margin-right: 10px;
   @media (max-width: 768px) {
     width: 10%;
   }
+`;
+
+const EmptyHeartIcon = styled(IoIosHeartEmpty)`
+  color: white;
+  font-size: 24px;
+`;
+
+const FullHeartIcon = styled(IoIosHeart)`
+  color: red;
+  font-size: 24px;
 `;
 
 const ProfilePicture = styled.img`
   height: 50px;
   width: 50px;
   border-radius: 50%;
-  margin-right: 15px;
+  margin-bottom: 20px;
   @media (max-width: 768px) {
     height: 40px;
     width: 40px;
@@ -165,9 +173,4 @@ const PreviewInfoContainer = styled.div`
       font-size: 9px;
     }
   }
-`;
-
-const StyledLink = styled(Link)`
-  color: white;
-  font-weight: bold;
 `;

@@ -32,8 +32,8 @@ export default function Header() {
   return (
     <HeaderContainer>
       {/* link here only for debugging purposes */}
-      <Link to="/">
-        <LogoTitle onClick={() => clearData()}>linkr</LogoTitle>
+      <Link to="/timeline">
+        <LogoTitle>linkr</LogoTitle>
       </Link>
       <HeaderMenu>
         {showMenu ? (
