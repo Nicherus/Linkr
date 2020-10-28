@@ -21,7 +21,7 @@ export default function TimeLinePage() {
 
   const fetchPostsTimeline = async () => {
     let offset = 0;
-    let limit = 10;
+    let limit = 15;
     setIsLoading(true);
     try {
       const { data } = await axios.get(

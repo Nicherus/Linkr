@@ -137,6 +137,7 @@ const Button = styled.button`
 `;
 
 const ProfilePic = styled.img`
+<<<<<<< HEAD
   height: 65px;
   width: 65px;
   border-radius: 50%;
@@ -164,3 +165,11 @@ const IconFoward = styled(IoIosArrowForward)`
     font-size: 25px;
   }
 `;
+=======
+    height: 65px;
+    width: 65px;
+    border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover;
+`;
+>>>>>>> 66f1476c680da926150f4b58fed5cd92ffc8bb64
