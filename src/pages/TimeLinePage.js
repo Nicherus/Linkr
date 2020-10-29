@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
+import InfiniteScroll from 'react-infinite-scroller';
 
 import Header from "../components/ui/Header";
 import UserContext from "../contexts/UserContext";
@@ -11,18 +13,28 @@ import Spinner from "../components/common/Spinner";
 
 export default function TimeLinePage() {
   const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [refresh, setRefresh] = useState(false);
+  const [offset, setOffset] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
   const { user, token } = useContext(UserContext);
+  const history = useHistory();
 
   useEffect(() => {
-    fetchPostsTimeline();
+    if(refresh){
+      setPosts([]);
+      setTimeout(fetchPostsTimeline(), 2000);
+    }
+    if(!token){
+      history.push('/');
+    }
   }, [refresh]);
 
   const fetchPostsTimeline = async () => {
-    let offset = 0;
-    let limit = 15;
-    setIsLoading(true);
+    let limit = 10;
+    if(refresh){
+      setOffset(0);
+      setRefresh(false);  
+    }
     try {
       const { data } = await axios.get(
         `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts?offset=${offset}&limit=${limit}`,
@@ -32,13 +44,15 @@ export default function TimeLinePage() {
           },
         }
       );
-      console.log(data);
-      setPosts([...data.posts]);
+      if(data.posts.length == 0){
+        setHasMore(false);
+      }
+      setOffset(offset + 10);
+      setPosts((oldArray) => [...oldArray, ...data.posts]);
     } catch (error) {
       console.error(error);
       alert("Houve uma falha ao obter os posts, por favor atualize a página");
     }
-    setIsLoading(false);
   };
 
   return (
@@ -53,13 +67,16 @@ export default function TimeLinePage() {
               setRefresh={setRefresh}
               refresh={refresh}
             />
-            {isLoading ? (
-              <Spinner />
-            ) : posts.length === 0 ? (
-              "Nenhum post encontrado"
-            ) : (
-              posts.map((post) => <SinglePost key={post.id} post={post} />)
-            )}
+            {refresh? <Spinner />
+            :
+              <InfiniteScroll
+                loadMore={fetchPostsTimeline}
+                loader={<Spinner />}
+                hasMore={hasMore}
+              >
+                {posts.map((post) => <SinglePost key={post.id} post={post} />)}
+              </InfiniteScroll>
+            }
           </PostsSectionContainer>
           <HashtagsContainer token={token} />
         </ContentContainer>

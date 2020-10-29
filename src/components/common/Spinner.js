@@ -12,11 +12,14 @@ export default function Spinner() {
 }
 
 const ContainerDiv = styled.div`
-  margin-top: 100px;
-  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  width: 100%;
 `;
 
 const LoadingImage = styled.img`
-  width: 100%;
+  width: 150px;
   display: block;
 `;
