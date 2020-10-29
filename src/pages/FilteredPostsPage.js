@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import InfiniteScroll from 'react-infinite-scroller'; 
+
 
 import Header from "../components/ui/Header";
 import { useLocation } from "react-router-dom";
@@ -11,28 +13,23 @@ import SinglePost from "../components/TimeLinePage/SinglePost";
 import Spinner from "../components/common/Spinner";
 
 export default function FilteredPostsPage() {
-  const [isLoading, setIsLoading] = useState(false);
   const { user, token } = useContext(UserContext);
-  // const token = '2dff901b-4dd4-44cb-8ab6-8d242c00d2d0'; //debugging
-  const params = useParams();
   const { state } = useLocation();
+  const params = useParams();
 
   const [posts, setPosts] = useState([]);
-  const [hashtag] = useState(params.hashtag);
+  const [offset, setOffset] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
   const [isMyPosts, setIsMyPosts] = useState(false);
 
-  const offset = 0;
-  const limit = 15;
-
-  useEffect(() => {
-    fetchPosts();
-  }, [params.hashtag]);
 
   const fetchPosts = () => {
     if (params.id) {
       fetchPostsByUser();
     } else if (params.hashtag) {
       fetchPostsByTag(false);
+    } else if (state.isMyLikes) {
+      fetchPostsMyLikes();
     } else {
       setIsMyPosts(true);
       fetchPostsByUser(true);
@@ -40,44 +37,70 @@ export default function FilteredPostsPage() {
   };
 
   const fetchPostsByUser = async (userPost) => {
-    setIsLoading(true);
     try {
       const { data } = await axios.get(
         `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${
           userPost ? user.id : params.id
-        }/posts?offset=${offset}&limit=${limit}`,
+        }/posts?offset=${offset}&limit=10`,
         {
           headers: {
             "user-token": `${token}`,
           },
         }
       );
-      setPosts([...data.posts]);
+      if(data.posts.length == 0){
+        setHasMore(false);
+      }
+      setOffset(offset + 10);
+      setPosts((oldArray) => [...oldArray, ...data.posts]);
     } catch (error) {
       console.error(error);
       alert("Houve uma falha ao obter os posts, por favor atualize a página");
     }
-    setIsLoading(false);
   };
 
   const fetchPostsByTag = async () => {
-    setIsLoading(true);
     try {
       const { data } = await axios.get(
-        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/hashtags/${params.hashtag}/posts?offset=${offset}&limit=${limit}`,
+        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/hashtags/${params.hashtag}/posts?offset=${offset}&limit=10`,
         {
           headers: {
             "user-token": `${token}`,
           },
         }
       );
-      setPosts([...data.posts]);
+      if(data.posts.length == 0){
+        setHasMore(false);
+      }
+      setOffset(offset + 10);
+      setPosts((oldArray) => [...oldArray, ...data.posts]);
     } catch (error) {
       console.error(error);
       alert("Houve uma falha ao obter os posts, por favor atualize a página");
     }
-    setIsLoading(false);
   };
+
+  const fetchPostsMyLikes = async () => { //MUDAR esperando endpoint my-likes
+    try {
+      const { data } = await axios.get(
+        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${user.id}/posts?offset=${offset}&limit=10`,
+        {
+          headers: {
+            "user-token": `${token}`,
+          },
+        }
+      );
+      if(data.posts.length == 0){
+        setHasMore(false);
+      }
+      setOffset(offset + 10);
+      setPosts((oldArray) => [...oldArray, ...data.posts]);
+    } catch (error) {
+      console.error(error);
+      alert("Houve uma falha ao obter os posts, por favor atualize a página");
+    }
+  };
+
 
   return (
     <>
@@ -92,13 +115,17 @@ export default function FilteredPostsPage() {
         </MainTitle>
         <ContentContainer>
           <PostsSectionContainer>
-            {isLoading ? (
-              <Spinner />
-            ) : posts.length === 0 ? (
-              "Nenhum post encontrado"
-            ) : (
-              posts.map((post) => <SinglePost key={post.id} post={post} />)
-            )}
+            <InfiniteScroll
+              loadMore={fetchPosts}
+              loader={<Spinner />}
+              hasMore={hasMore}
+            >
+              {(posts.length === 0)? 
+                "Nenhum post encontrado"
+              :
+                posts.map((post) => <SinglePost key={post.id} post={post} />)
+              }
+            </InfiniteScroll>
           </PostsSectionContainer>
           <HashtagsContainer token={token} />
         </ContentContainer>

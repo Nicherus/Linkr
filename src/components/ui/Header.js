@@ -21,7 +21,10 @@ export default function Header() {
   };
 
   const goToMyLikes = () => {
-    history.push("/my-likes");
+    history.push({ 
+      pathname: '/my-likes', 
+      state: { isMyLikes: true } 
+    });
   };
 
   const logout = () => {

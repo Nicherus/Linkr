@@ -12,12 +12,13 @@ import SinglePost from "../components/TimeLinePage/SinglePost";
 import Spinner from "../components/common/Spinner";
 
 export default function TimeLinePage() {
-  const [posts, setPosts] = useState([]);
-  const [refresh, setRefresh] = useState(false);
-  const [offset, setOffset] = useState(0);
-  const [hasMore, setHasMore] = useState(true);
   const { user, token } = useContext(UserContext);
   const history = useHistory();
+
+  const [posts, setPosts] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     if(refresh){
@@ -30,14 +31,13 @@ export default function TimeLinePage() {
   }, [refresh]);
 
   const fetchPostsTimeline = async () => {
-    let limit = 10;
     if(refresh){
       setOffset(0);
       setRefresh(false);  
     }
     try {
       const { data } = await axios.get(
-        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts?offset=${offset}&limit=${limit}`,
+        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts?offset=${offset}&limit=10`,
         {
           headers: {
             "user-token": `${token}`,
@@ -74,7 +74,11 @@ export default function TimeLinePage() {
                 loader={<Spinner />}
                 hasMore={hasMore}
               >
-                {posts.map((post) => <SinglePost key={post.id} post={post} />)}
+                {(posts.length === 0)? 
+                  "Nenhum post encontrado"
+                :
+                  posts.map((post) => <SinglePost key={post.id} post={post} />)
+                }
               </InfiniteScroll>
             }
           </PostsSectionContainer>

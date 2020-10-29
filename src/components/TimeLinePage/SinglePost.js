@@ -54,7 +54,7 @@ export default function SinglePost({ post }) {
       <UserInfoContainer>
         <Link
           to={{
-            pathname: `user/${post.user.id}`,
+            pathname: `/user/${post.user.id}`,
             state: { userName: post.user.username },
           }}
         >

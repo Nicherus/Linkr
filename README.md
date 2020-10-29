@@ -86,13 +86,13 @@
     Dica: Pesquise por uma biblioteca chamada **react-tooltip**
 
   - [x] Adicione mais um link no menu chamada "My likes" que redireciona o usuário para a rota "/my-likes"
-  - [ ] Implemente a página "/my-likes" como mais uma página de posts filtrados
+  - [esperando api] Implemente a página "/my-likes" como mais uma página de posts filtrados
 
 - Campo para digitar hashtag
   - [x] Na caixa de "trending" adicione um input que permita o usuário digitar uma hashtag e, ao dar enter, redirecionar o usuário para a página "/hashtag/:hashtag" onde hashtag é o texto digitado
 - Carregamento dinâmico
 
-  - [ ] Em todas as telas que tem carregamento de posts, passe a buscar da API somente 10 posts de cada vez, carregando mais posts conforme o usuário scrolla até o final da tela
+  - [x] Em todas as telas que tem carregamento de posts, passe a buscar da API somente 10 posts de cada vez, carregando mais posts conforme o usuário scrolla até o final da tela
 
     Dica: pesquise por uma biblioteca chamada **react-infinite-scroller**
 
