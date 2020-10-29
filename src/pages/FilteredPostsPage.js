@@ -14,7 +14,7 @@ import Spinner from "../components/common/Spinner";
 
 export default function FilteredPostsPage() {
   const { user, token } = useContext(UserContext);
-  const { state } = useLocation();
+  const { state, pathname } = useLocation();
   const params = useParams();
 
   const [posts, setPosts] = useState([]);
@@ -28,7 +28,7 @@ export default function FilteredPostsPage() {
       fetchPostsByUser();
     } else if (params.hashtag) {
       fetchPostsByTag(false);
-    } else if (state && state.isMyLikes) {
+    } else if (pathname == '/my-likes') {
       fetchPostsMyLikes();
     } else {
       setIsMyPosts(true);
@@ -80,10 +80,10 @@ export default function FilteredPostsPage() {
     }
   };
 
-  const fetchPostsMyLikes = async () => { //MUDAR esperando endpoint my-likes
-    try {
+  const fetchPostsMyLikes = async () => {
+    try { 
       const { data } = await axios.get(
-        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${user.id}/posts?offset=${offset}&limit=10`,
+        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts/liked?offset=${offset}&limit=10`,
         {
           headers: {
             "user-token": `${token}`,
@@ -111,6 +111,8 @@ export default function FilteredPostsPage() {
             ? "My Posts"
             : params.hashtag
             ? `#${params.hashtag}`
+            : (pathname == '/my-likes')
+            ? "My Likes"
             : `${state && state.userName}'s posts`}
         </MainTitle>
         <ContentContainer>
