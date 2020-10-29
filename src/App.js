@@ -53,7 +53,7 @@ body {
   font-family: var(--fontOswald);
 }
 
-// transition effect
+// Transition effect
 
 .fade-enter {
   opacity: 0.01;
