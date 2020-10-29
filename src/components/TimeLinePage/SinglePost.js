@@ -80,9 +80,9 @@ export default function SinglePost({ post }) {
           <PreviewInfoContainer>
             <h3>{post.linkTitle}</h3>
             <p>{post.linkDescription}</p>
-            <a href={post.link} target="_blank" rel="noreferrer">
+            <Link href={post.link} target="_blank" rel="noreferrer">
               {post.link}
-            </a>
+            </Link>
           </PreviewInfoContainer>
           <img src={post.linkImage} alt="link preview" />
         </PreviewContainer>

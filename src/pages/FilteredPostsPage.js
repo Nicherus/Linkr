@@ -28,7 +28,7 @@ export default function FilteredPostsPage() {
       fetchPostsByUser();
     } else if (params.hashtag) {
       fetchPostsByTag(false);
-    } else if (state.isMyLikes) {
+    } else if (state && state.isMyLikes) {
       fetchPostsMyLikes();
     } else {
       setIsMyPosts(true);

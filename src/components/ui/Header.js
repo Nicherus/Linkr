@@ -49,9 +49,9 @@ export default function Header() {
         )}
         <ProfilePic draggable={false} src={user.avatar} />
         <MenuOptions show={showMenu}>
-          <a onClick={() => goToMyPosts()}>My posts</a>
-          <a onClick={() => goToMyLikes()}>My likes</a>
-          <a onClick={() => logout()}>Logout</a>
+          <Link onClick={() => goToMyPosts()}>My posts</Link>
+          <Link onClick={() => goToMyLikes()}>My likes</Link>
+          <Link onClick={() => logout()}>Logout</Link>
         </MenuOptions>
       </HeaderMenu>
     </HeaderContainer>
