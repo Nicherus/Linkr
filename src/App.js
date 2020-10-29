@@ -24,7 +24,7 @@ function App() {
           >
             <section className="route-section">
               <Switch location={location}>
-                <Route path="/" exact component={LoginPage} />
+                <Route path="/" component={LoginPage} />
                 <Route path="/timeline" component={TimeLinePage} />
                 <Route path="/my-posts" component={FilteredPostsPage} />
                 <Route path="/my-likes" component={FilteredPostsPage} />
