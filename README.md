@@ -6,8 +6,8 @@
   - [x] Para isso, crie um repositório público no seu GitHub e compartilhe acesso com sua dupla
   - [x] **A cada requisito implementado** faça um commit com uma mensagem descritiva do que você evoluiu. Caso queira dividir um requisito em vários commits, não há problema. Mas evite colocar mais de um requisito no mesmo commit
 - Layout
-  - [-] Aplicar layout para desktop, seguindo imagens fornecidas
-  - [-] Aplicar layout para mobile, seguindo imagens fornecidas
+  - [x] Aplicar layout para desktop, seguindo imagens fornecidas
+  - [x] Aplicar layout para mobile, seguindo imagens fornecidas
   - [x] Fontes e cores devem ser extraídas do Figma: [https://www.figma.com/file/PzDjhf1EyeZ0opdDnhLmwJ/linkr?node-id=0%3A1](https://www.figma.com/file/PzDjhf1EyeZ0opdDnhLmwJ/linkr?node-id=0%3A1) (crie uma conta no Figma e se logue para ter acesso ao Inspect)
   - [x] Tamanhos/posicionamento podem ser aproximados, não é necessário copiar o Figma (não recomendado!)
   - [x] Para ícones, utilize a biblioteca **react-icons**
@@ -73,7 +73,7 @@
     - [x] Os posts carregados devem ser obtidos das rotas da API correspondentes
 
 - Deploy
-  - [ ] Coloque seu projeto no ar usando o GitHub Pages
+  - [x] Coloque seu projeto no ar usando o GitHub Pages
 
 # Bônus (opcional)
 
