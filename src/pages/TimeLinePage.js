@@ -44,7 +44,7 @@ export default function TimeLinePage() {
           },
         }
       );
-      if (data.posts.length == 0) {
+      if (data.posts.length === 0) {
         setHasMore(false);
       }
       setOffset(offset + 10);
@@ -78,7 +78,12 @@ export default function TimeLinePage() {
                 {posts.length === 0
                   ? "Nenhum post encontrado"
                   : posts.map((post) => (
-                      <SinglePost key={post.id} post={post} />
+                      <SinglePost
+                        key={post.id}
+                        post={post}
+                        setRefresh={setRefresh}
+                        refresh={refresh}
+                      />
                     ))}
               </InfiniteScroll>
             )}

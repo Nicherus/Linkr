@@ -2,18 +2,22 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
+import { AiFillDelete } from "react-icons/ai";
 import ReactTooltip from "react-tooltip";
 import axios from "axios";
 
 import replaceHashOnText from "../../utils/hashtagParser";
 import parseTooltipText from "../../utils/parseTooltipText";
 import UserContext from "../../contexts/UserContext";
+import Modal from "./Modal";
 
-export default function SinglePost({ post }) {
+export default function SinglePost({ post, refresh, setRefresh }) {
   const { user, token } = useContext(UserContext);
   const initialState = post.likes.some((like) => like.userId === user.id);
   const [isLiked, setIsLiked] = useState(initialState);
   const [likedArray, setLikedArray] = useState(post.likes);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const likePost = async () => {
     if (!isLiked) {
@@ -49,6 +53,28 @@ export default function SinglePost({ post }) {
     }
   };
 
+  const handleDelete = async () => {
+    console.log("handle delete chamada");
+    setIsLoading(true);
+    try {
+      await axios.delete(
+        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts/${post.id}`,
+        { headers: { "user-token": token } }
+      );
+      setIsLoading(false);
+      setIsModalOpen(!isModalOpen);
+      // refresh posts
+      setRefresh(!refresh);
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+      setIsModalOpen(!isModalOpen);
+      alert("Ocorreu um erro, não foi possível excluir o post");
+    }
+  };
+
+  const isOwner = post.user.id === user.id;
+
   return (
     <PostContainer>
       <UserInfoContainer>
@@ -74,7 +100,18 @@ export default function SinglePost({ post }) {
         )}
       </UserInfoContainer>
       <PostContentContainer>
-        <h3>{post.user.username}</h3>
+        <SinglePostHeader>
+          <h3>{post.user.username}</h3>
+          {isOwner && (
+            <DeleteIcon onClick={() => setIsModalOpen(!isModalOpen)} />
+          )}
+          <Modal
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+            handleDelete={handleDelete}
+            isLoading={isLoading}
+          />
+        </SinglePostHeader>
         <p>{replaceHashOnText(post)}</p>
         <PreviewContainer>
           <PreviewInfoContainer>
@@ -206,4 +243,16 @@ const PreviewInfoContainer = styled.div`
       font-size: 9px;
     }
   }
+`;
+
+const SinglePostHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const DeleteIcon = styled(AiFillDelete)`
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
 `;

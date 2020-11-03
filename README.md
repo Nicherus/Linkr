@@ -102,30 +102,21 @@
 
     Dica: pesquise por uma biblioteca chamada **react-transition-group** e como utilizá-la em conjunto com o react-router
 
-# Layout
-
-Crie uma conta no Figma e acesse o link: [https://www.figma.com/file/PzDjhf1EyeZ0opdDnhLmwJ/linkr?node-id=0%3A1](https://www.figma.com/file/PzDjhf1EyeZ0opdDnhLmwJ/linkr?node-id=0%3A1)
-
 ## SEMANA 2
 
 - Apagar post
 
-  - [ ] Adicionar um botão de "lixeira" (remover) nos posts em que o usuário logado seja o autor, seguindo layout
-  - [ ] Ao clicar, deve-se abrir uma modal (também chamada de dialog), confirmando que o usuário gostaria de deletar o post, seguindo layout.
+  - [x] Adicionar um botão de "lixeira" (remover) nos posts em que o usuário logado seja o autor, seguindo layout
+  - [x] Ao clicar, deve-se abrir uma modal (também chamada de dialog), confirmando que o usuário gostaria de deletar o post, seguindo layout.
 
     **Dica**: pesquisa pela biblioteca **react-modal**
 
-  - [ ] Caso afirmativo, deve-se enviar um request para o servidor pedindo o delete, exibindo uma mensagem de loading e desabilitando os botões do modal enquanto o servidor não responde
+  - [x] Caso afirmativo, deve-se enviar um request para o servidor pedindo o delete, exibindo uma mensagem de loading e desabilitando os botões do modal enquanto o servidor não responde
 
     **Dica**: pesquise pela função **axios.delete**
 
-  - [ ] Ao retornar, em caso de sucesso a modal deve ser fechada e a lista de posts recarregada
-  - [ ] Em caso de erro, deve-se fechar a modal e exibir um alerta pro usuário de que não foi possível excluir o post
-  - Layout
-
-    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/db9d6090-4207-446d-90df-93384d776b74/Desktop_-_16.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/db9d6090-4207-446d-90df-93384d776b74/Desktop_-_16.png)
-
-    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5c45af95-ba8a-4549-92fd-00a6b3e4df43/Desktop_-_17.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5c45af95-ba8a-4549-92fd-00a6b3e4df43/Desktop_-_17.png)
+  - [x] Ao retornar, em caso de sucesso a modal deve ser fechada e a lista de posts recarregada
+  - [x] Em caso de erro, deve-se fechar a modal e exibir um alerta pro usuário de que não foi possível excluir o post
 
 - Editar post
 
@@ -141,9 +132,6 @@ Crie uma conta no Figma e acesse o link: [https://www.figma.com/file/PzDjhf1EyeZ
 
   - [ ] Em caso de sucesso, o campo deve voltar a ser um parágrafo normal, com o texto atualizado
   - [ ] Em caso de erro, o usuário deve ser alertado que não foi possível salvar as alterações e o campo deve voltar a ficar enabled pra edição, ainda contendo o último texto digitado pelo usuário
-  - Layout
-
-    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5fcb50a6-1f12-48ae-a1c1-c3c907a4d804/Desktop_-_10.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5fcb50a6-1f12-48ae-a1c1-c3c907a4d804/Desktop_-_10.png)
 
 - Follow / Unfollow
 
@@ -153,9 +141,6 @@ Crie uma conta no Figma e acesse o link: [https://www.figma.com/file/PzDjhf1EyeZ
   - [ ] Em caso de sucesso, o botão deve alternar de Follow para Unfollow e vice-versa
   - [ ] Em caso de falha, deve-se exibir um alerta pro usuário indicando que não foi possível executar a operação
   - [ ] Para saber inicialmente se o usuário já segue ou não uma pessoa, você pode pegar a lista de usuários seguidos através da API. O botão de Follow/Unfollow deve iniciar no estado correspondente.
-  - Layout
-
-    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c27b7c13-d34b-49b9-b1ef-3dddd28e42ad/Desktop_-_11.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c27b7c13-d34b-49b9-b1ef-3dddd28e42ad/Desktop_-_11.png)
 
 - Busca de perfis
 
@@ -167,9 +152,6 @@ Crie uma conta no Figma e acesse o link: [https://www.figma.com/file/PzDjhf1EyeZ
 
   - [ ] Ao exibir os resultados, deve-se mostrar no topo os usuários que você já segue, com a indicação de "following" seguindo layout. Esse tratamento deve ser feito no front, o servidor não responderá de forma ordenada
   - [ ] Ao clicar em um resultado, deve-se redirecionar o usuário para a página de perfil daquele usuário
-  - Layout
-
-    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/454169b0-3a2f-43a5-b420-a65dea654a75/Desktop_-_12_(1).png](<https://s3-us-west-2.amazonaws.com/secure.notion-static.com/454169b0-3a2f-43a5-b420-a65dea654a75/Desktop_-_12_(1).png>)
 
 - Nova timeline
 
@@ -196,10 +178,6 @@ Crie uma conta no Figma e acesse o link: [https://www.figma.com/file/PzDjhf1EyeZ
 
     **Dica**: pesquise por uma lib chamada **get-youtube-id** e pesquise sobre como adicionar o player do YouTube no seu projeto
 
-  - Layout
-
-    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9dabaf85-9fc6-470b-91f2-d4c09fa7e1f2/Desktop_-_15.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9dabaf85-9fc6-470b-91f2-d4c09fa7e1f2/Desktop_-_15.png)
-
 - Desafio: Localização
 
   - [ ] Adicione um botão de "Localização ativada" / "Localização desativada" na caixa de publicação de posts, conforme layout
@@ -214,12 +192,6 @@ Crie uma conta no Figma e acesse o link: [https://www.figma.com/file/PzDjhf1EyeZ
   - [ ] Ao clicar nesse ícone, deve-se abrir uma modal conforme layout, exibindo um mapa com a posição informada
 
     **Dica**: pesquise sobre como integrar um mapa do Google Maps no seu projeto React
-
-  - Layout
-
-    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b6c83831-9c85-4826-9347-15e82761c1e7/Desktop_-_13.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b6c83831-9c85-4826-9347-15e82761c1e7/Desktop_-_13.png)
-
-    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3ed50002-b280-4af7-b600-0ffbfb7cd07f/Desktop_-_14.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3ed50002-b280-4af7-b600-0ffbfb7cd07f/Desktop_-_14.png)
 
 # Layout
 
