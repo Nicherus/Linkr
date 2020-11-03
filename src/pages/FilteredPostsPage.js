@@ -2,10 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import InfiniteScroll from 'react-infinite-scroller'; 
+import InfiniteScroll from "react-infinite-scroller";
 
-
-import Header from "../components/ui/Header";
+import Header from "../components/common/Header";
 import { useLocation } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
 import HashtagsContainer from "../components/TimeLinePage/HashtagsContainer";
@@ -22,13 +21,12 @@ export default function FilteredPostsPage() {
   const [hasMore, setHasMore] = useState(true);
   const [isMyPosts, setIsMyPosts] = useState(false);
 
-
   const fetchPosts = () => {
     if (params.id) {
       fetchPostsByUser();
     } else if (params.hashtag) {
       fetchPostsByTag(false);
-    } else if (pathname == '/my-likes') {
+    } else if (pathname == "/my-likes") {
       fetchPostsMyLikes();
     } else {
       setIsMyPosts(true);
@@ -48,7 +46,7 @@ export default function FilteredPostsPage() {
           },
         }
       );
-      if(data.posts.length == 0){
+      if (data.posts.length == 0) {
         setHasMore(false);
       }
       setOffset(offset + 10);
@@ -69,7 +67,7 @@ export default function FilteredPostsPage() {
           },
         }
       );
-      if(data.posts.length == 0){
+      if (data.posts.length == 0) {
         setHasMore(false);
       }
       setOffset(offset + 10);
@@ -81,7 +79,7 @@ export default function FilteredPostsPage() {
   };
 
   const fetchPostsMyLikes = async () => {
-    try { 
+    try {
       const { data } = await axios.get(
         `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts/liked?offset=${offset}&limit=10`,
         {
@@ -90,7 +88,7 @@ export default function FilteredPostsPage() {
           },
         }
       );
-      if(data.posts.length == 0){
+      if (data.posts.length == 0) {
         setHasMore(false);
       }
       setOffset(offset + 10);
@@ -101,7 +99,6 @@ export default function FilteredPostsPage() {
     }
   };
 
-
   return (
     <>
       <Header />
@@ -111,7 +108,7 @@ export default function FilteredPostsPage() {
             ? "My Posts"
             : params.hashtag
             ? `#${params.hashtag}`
-            : (pathname == '/my-likes')
+            : pathname == "/my-likes"
             ? "My Likes"
             : `${state && state.userName}'s posts`}
         </MainTitle>
@@ -122,11 +119,9 @@ export default function FilteredPostsPage() {
               loader={<Spinner />}
               hasMore={hasMore}
             >
-              {(posts.length === 0)? 
-                "Nenhum post encontrado"
-              :
-                posts.map((post) => <SinglePost key={post.id} post={post} />)
-              }
+              {posts.length === 0
+                ? "Nenhum post encontrado"
+                : posts.map((post) => <SinglePost key={post.id} post={post} />)}
             </InfiniteScroll>
           </PostsSectionContainer>
           <HashtagsContainer token={token} />

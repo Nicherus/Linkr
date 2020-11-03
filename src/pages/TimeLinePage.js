@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
-import InfiniteScroll from 'react-infinite-scroller';
+import InfiniteScroll from "react-infinite-scroller";
 
-import Header from "../components/ui/Header";
+import Header from "../components/common/Header";
 import UserContext from "../contexts/UserContext";
 import HashtagsContainer from "../components/TimeLinePage/HashtagsContainer";
 import PostForm from "../components/TimeLinePage/PostForm";
@@ -21,19 +21,19 @@ export default function TimeLinePage() {
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
-    if(refresh){
+    if (refresh) {
       setPosts([]);
       setTimeout(fetchPostsTimeline(), 2000);
     }
-    if(!token){
-      history.push('/');
+    if (!token) {
+      history.push("/");
     }
   }, [refresh]);
 
   const fetchPostsTimeline = async () => {
-    if(refresh){
+    if (refresh) {
       setOffset(0);
-      setRefresh(false);  
+      setRefresh(false);
     }
     try {
       const { data } = await axios.get(
@@ -44,7 +44,7 @@ export default function TimeLinePage() {
           },
         }
       );
-      if(data.posts.length == 0){
+      if (data.posts.length == 0) {
         setHasMore(false);
       }
       setOffset(offset + 10);
@@ -67,20 +67,21 @@ export default function TimeLinePage() {
               setRefresh={setRefresh}
               refresh={refresh}
             />
-            {refresh? <Spinner />
-            :
+            {refresh ? (
+              <Spinner />
+            ) : (
               <InfiniteScroll
                 loadMore={fetchPostsTimeline}
                 loader={<Spinner />}
                 hasMore={hasMore}
               >
-                {(posts.length === 0)? 
-                  "Nenhum post encontrado"
-                :
-                  posts.map((post) => <SinglePost key={post.id} post={post} />)
-                }
+                {posts.length === 0
+                  ? "Nenhum post encontrado"
+                  : posts.map((post) => (
+                      <SinglePost key={post.id} post={post} />
+                    ))}
               </InfiniteScroll>
-            }
+            )}
           </PostsSectionContainer>
           <HashtagsContainer token={token} />
         </ContentContainer>
