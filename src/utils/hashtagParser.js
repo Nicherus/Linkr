@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const replaceHashOnText = (post) => {
-  return post.text.split(" ").map((word, i) => {
+const replaceHashOnText = (postText) => {
+  return postText.split(" ").map((word, i) => {
     if (word.charAt(0) === "#") {
       const wordMinusHash = word.slice(1);
       if (word.includes(",")) {

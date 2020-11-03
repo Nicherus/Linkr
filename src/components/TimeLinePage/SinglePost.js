@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
 import { AiFillDelete } from "react-icons/ai";
+import { VscEdit } from "react-icons/vsc";
 import ReactTooltip from "react-tooltip";
 import axios from "axios";
 
@@ -10,6 +11,7 @@ import replaceHashOnText from "../../utils/hashtagParser";
 import parseTooltipText from "../../utils/parseTooltipText";
 import UserContext from "../../contexts/UserContext";
 import Modal from "./Modal";
+import EditPost from "./EditPost";
 
 export default function SinglePost({ post, refresh, setRefresh }) {
   const { user, token } = useContext(UserContext);
@@ -17,7 +19,9 @@ export default function SinglePost({ post, refresh, setRefresh }) {
   const [isLiked, setIsLiked] = useState(initialState);
   const [likedArray, setLikedArray] = useState(post.likes);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [postText, setPostText] = useState(post.text);
 
   const likePost = async () => {
     if (!isLiked) {
@@ -63,7 +67,6 @@ export default function SinglePost({ post, refresh, setRefresh }) {
       );
       setIsLoading(false);
       setIsModalOpen(!isModalOpen);
-      // refresh posts
       setRefresh(!refresh);
     } catch (error) {
       console.error(error);
@@ -103,7 +106,10 @@ export default function SinglePost({ post, refresh, setRefresh }) {
         <SinglePostHeader>
           <h3>{post.user.username}</h3>
           {isOwner && (
-            <DeleteIcon onClick={() => setIsModalOpen(!isModalOpen)} />
+            <span>
+              <EditIcon onClick={() => setIsEdit(!isEdit)} />
+              <DeleteIcon onClick={() => setIsModalOpen(!isModalOpen)} />
+            </span>
           )}
           <Modal
             isModalOpen={isModalOpen}
@@ -112,7 +118,19 @@ export default function SinglePost({ post, refresh, setRefresh }) {
             isLoading={isLoading}
           />
         </SinglePostHeader>
-        <p>{replaceHashOnText(post)}</p>
+        {isEdit ? (
+          <EditPost
+            isEdit={isEdit}
+            text={postText}
+            setPostText={setPostText}
+            setIsEdit={setIsEdit}
+            postId={post.id}
+            userToken={token}
+          />
+        ) : (
+          <p>{replaceHashOnText(postText)}</p>
+        )}
+
         <PreviewContainer>
           <PreviewInfoContainer>
             <h3>{post.linkTitle}</h3>
@@ -255,4 +273,11 @@ const DeleteIcon = styled(AiFillDelete)`
   color: white;
   font-size: 16px;
   cursor: pointer;
+`;
+
+const EditIcon = styled(VscEdit)`
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 8px;
 `;

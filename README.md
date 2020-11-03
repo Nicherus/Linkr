@@ -120,18 +120,18 @@
 
 - Editar post
 
-  - [ ] Adicionar um botão de "lápis" (editar) nos posts em que o usuário logado seja o autor, seguindo layout
-  - [ ] Ao clicar, o texto do post deve se tornar um campo editável seguindo layout e o cursor deve ser colocado automaticamente no campo
+  - [x] Adicionar um botão de "lápis" (editar) nos posts em que o usuário logado seja o autor, seguindo layout
+  - [x] Ao clicar, o texto do post deve se tornar um campo editável seguindo layout e o cursor deve ser colocado automaticamente no campo
 
     **Dica**: pesquise por "**focus useRef**" e descubra como fazer esse foco com React
 
-  - [ ] Ao clicar novamente no botão, ou pressionar Esc dentro do campo, as alterações devem ser descartadas e o texto do post deve voltar a ser um parágrafo normal em vez de campo
-  - [ ] Ao dar enter dentro desse campo, deve-se enviar um update pro servidor e campo deve ficar disabled enquanto a requisição não volta
+  - [x] Ao clicar novamente no botão, ou pressionar Esc dentro do campo, as alterações devem ser descartadas e o texto do post deve voltar a ser um parágrafo normal em vez de campo
+  - [x] Ao dar enter dentro desse campo, deve-se enviar um update pro servidor e campo deve ficar disabled enquanto a requisição não volta
 
     **Dica**: pesquise por **axios.put**
 
-  - [ ] Em caso de sucesso, o campo deve voltar a ser um parágrafo normal, com o texto atualizado
-  - [ ] Em caso de erro, o usuário deve ser alertado que não foi possível salvar as alterações e o campo deve voltar a ficar enabled pra edição, ainda contendo o último texto digitado pelo usuário
+  - [x] Em caso de sucesso, o campo deve voltar a ser um parágrafo normal, com o texto atualizado
+  - [x] Em caso de erro, o usuário deve ser alertado que não foi possível salvar as alterações e o campo deve voltar a ficar enabled pra edição, ainda contendo o último texto digitado pelo usuário
 
 - Follow / Unfollow
 
