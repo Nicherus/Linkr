@@ -13,6 +13,7 @@ import UserContext from "../../contexts/UserContext";
 import Modal from "./Modal";
 import EditPost from "./EditPost";
 import LinkPreview from "./LinkPreview";
+import Location from "./Location";
 
 export default function SinglePost({ post, refresh, setRefresh }) {
   const { user, token } = useContext(UserContext);
@@ -105,7 +106,15 @@ export default function SinglePost({ post, refresh, setRefresh }) {
       </UserInfoContainer>
       <PostContentContainer>
         <SinglePostHeader>
-          <h3>{post.user.username}</h3>
+          <TitleContainer>
+            <h3>{post.user.username}</h3>
+            {post.geolocation && (
+              <Location
+                userName={post.user.username}
+                geolocation={post.geolocation}
+              />
+            )}
+          </TitleContainer>
           {isOwner && (
             <span>
               <EditIcon onClick={() => setIsEdit(!isEdit)} />
@@ -158,7 +167,7 @@ const PostContentContainer = styled.div`
   width: 85%;
   font-family: var(--fontLato);
   word-break: break-all;
-
+  overflow: hidden;
   h3 {
     font-size: 19px;
     color: white;
@@ -227,4 +236,8 @@ const EditIcon = styled(VscEdit)`
   font-size: 16px;
   cursor: pointer;
   margin-right: 8px;
+`;
+
+const TitleContainer = styled.div`
+  display: flex;
 `;

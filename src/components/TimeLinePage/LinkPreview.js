@@ -6,7 +6,10 @@ export default function LinkPreview({ post }) {
   return (
     <>
       {post.link.includes("youtube") ? (
-        <YoutubePlayer url={post.link} controls={true} />
+        <PlayerContainer>
+          <YoutubePlayer url={post.link} controls={true} width={"100%"} />
+          <p>{post.link}</p>
+        </PlayerContainer>
       ) : (
         <PreviewContainer>
           <PreviewInfoContainer>
@@ -67,6 +70,17 @@ const PreviewInfoContainer = styled.div`
   }
 `;
 
+const PlayerContainer = styled.div`
+  margin-top: 20px;
+  margin-bottom: 10px;
+  @media (max-width: 768px) {
+    margin: 5px 0;
+  }
+`;
+
 const YoutubePlayer = styled(ReactPlayer)`
-  margin: 20px;
+  margin-bottom: 10px;
+  @media (max-width: 768px) {
+    margin: 5px 0;
+  }
 `;

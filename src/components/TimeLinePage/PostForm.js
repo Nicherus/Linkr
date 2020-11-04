@@ -1,14 +1,35 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import { GoLocation } from "react-icons/go";
 
 import UserContext from "../../contexts/UserContext";
+import { getLocation } from "../../utils/geolocation";
 
 export default function PostForm({ userPicture, setRefresh, refresh }) {
   const [link, setLink] = useState("");
   const [text, setText] = useState("");
+  const [activeLocation, setActiveLocation] = useState(false);
+  const [geolocation, setGeolocation] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { token } = useContext(UserContext);
+
+  const toggleGeolocation = async () => {
+    if (activeLocation) {
+      setActiveLocation(false);
+      return;
+    }
+
+    getLocation(success, (e) => alert(e.message));
+
+    function success(position) {
+      setActiveLocation(true);
+      setGeolocation({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
+    }
+  };
 
   const sendPost = async (e) => {
     e.preventDefault();
@@ -16,8 +37,10 @@ export default function PostForm({ userPicture, setRefresh, refresh }) {
       alert("Campo de link obrigatorio");
       return;
     }
+
     setIsLoading(true);
     const post = { link, text };
+    if (activeLocation) post.geolocation = geolocation;
 
     try {
       await axios.post(
@@ -60,9 +83,19 @@ export default function PostForm({ userPicture, setRefresh, refresh }) {
           onChange={(e) => setText(e.target.value)}
           disabled={isLoading}
         />
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Publishing..." : "Publicar"}
-        </Button>
+        <BottomContainer>
+          <LocationContainer onClick={toggleGeolocation}>
+            <LocationIcon />
+            {activeLocation ? (
+              <p>Localização ativada</p>
+            ) : (
+              <p>Localização desativada</p>
+            )}
+          </LocationContainer>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? "Publishing..." : "Publicar"}
+          </Button>
+        </BottomContainer>
       </PostFormContainer>
     </PublishPostContainer>
   );
@@ -143,4 +176,27 @@ const Button = styled.button`
   @media (max-width: 768px) {
     font-size: 13px;
   }
+`;
+
+const BottomContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const LocationContainer = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  p {
+    color: #238700;
+    font-weight: 300;
+    font-size: 13px;
+    font-family: var(--fontLato);
+  }
+`;
+
+const LocationIcon = styled(GoLocation)`
+  color: #238700;
+  margin-right: 5px;
 `;

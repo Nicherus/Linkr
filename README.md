@@ -180,16 +180,16 @@
 
 - Desafio: Localização
 
-  - [ ] Adicione um botão de "Localização ativada" / "Localização desativada" na caixa de publicação de posts, conforme layout
-  - [ ] Por padrão, a localização deve vir desativada
-  - [ ] Ao clicar para ativá-la, deve-se pedir permissão ao navegador para obter essa informação de geolocalização
+  - [x] Adicione um botão de "Localização ativada" / "Localização desativada" na caixa de publicação de posts, conforme layout
+  - [x] Por padrão, a localização deve vir desativada
+  - [x] Ao clicar para ativá-la, deve-se pedir permissão ao navegador para obter essa informação de geolocalização
 
     **Dica**: pesquise como obter a geolocalização por JS
 
-  - [ ] Caso não seja possível obter a localização, exiba um alerta para o usuário e volte o botão para o estado de desativado
-  - [ ] Caso consiga pegar a localização, envie essa nova informação de latitude e longitude para o servidor ao publicar um post, seguindo documentação da API
-  - [ ] Ao exibir posts na timeline, deve-se exibir um ícone de "pinpoint" ao lado do nome do autor do post, conforme layout
-  - [ ] Ao clicar nesse ícone, deve-se abrir uma modal conforme layout, exibindo um mapa com a posição informada
+  - [x] Caso não seja possível obter a localização, exiba um alerta para o usuário e volte o botão para o estado de desativado
+  - [x] Caso consiga pegar a localização, envie essa nova informação de latitude e longitude para o servidor ao publicar um post, seguindo documentação da API
+  - [x] Ao exibir posts na timeline, deve-se exibir um ícone de "pinpoint" ao lado do nome do autor do post, conforme layout
+  - [x] Ao clicar nesse ícone, deve-se abrir uma modal conforme layout, exibindo um mapa com a posição informada
 
     **Dica**: pesquise sobre como integrar um mapa do Google Maps no seu projeto React
 
