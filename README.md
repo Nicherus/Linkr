@@ -174,7 +174,7 @@
 
 - Link do YouTube
 
-  - [ ] Ao exibir um post, caso o link compartilhado seja um link do YouTube, substitua o snippet padrão pelo player embedded do YouTube
+  - [x] Ao exibir um post, caso o link compartilhado seja um link do YouTube, substitua o snippet padrão pelo player embedded do YouTube
 
     **Dica**: pesquise por uma lib chamada **get-youtube-id** e pesquise sobre como adicionar o player do YouTube no seu projeto
 
