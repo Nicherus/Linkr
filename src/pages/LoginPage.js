@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 import Form from "../components/LoginPage/Form";
+import UserContext from "../contexts/UserContext";
 
 export default function LoginPage() {
   const [formState, setFormState] = useState("login");
+  const { token } = useContext(UserContext);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (token) history.push("/timeline");
+  }, []);
 
   const handleChangeFormState = () => {
     formState === "login" ? setFormState("signup") : setFormState("login");

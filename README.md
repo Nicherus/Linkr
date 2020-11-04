@@ -166,11 +166,11 @@
 
 - Persistência de login
 
-  - [ ] Faça com que o usuário permaneça logado mesmo ao atualizar a página. Para isso, ao logar, armazene o token de autenticação no navegador e verifique se o mesmo existe ao entrar na aplicação, redirecionando o usuário para a timeline imediatamente caso já esteja logado
+  - [x] Faça com que o usuário permaneça logado mesmo ao atualizar a página. Para isso, ao logar, armazene o token de autenticação no navegador e verifique se o mesmo existe ao entrar na aplicação, redirecionando o usuário para a timeline imediatamente caso já esteja logado
 
     **Dica**: pesquise por **Local Storage** e utilize esse recurso para armazenar dados no navegador
 
-  - [ ] Ao clicar em "Logout", além de redirecionar para a tela de login, apague o token persistido do Local Storage
+  - [x] Ao clicar em "Logout", além de redirecionar para a tela de login, apague o token persistido do Local Storage
 
 - Link do YouTube
 
