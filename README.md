@@ -135,12 +135,12 @@
 
 - Follow / Unfollow
 
-  - [ ] Ao entrar na página de perfil de uma pessoa (que não seja o próprio usuário logado), deve existir agora um botão "Follow" / "Unfollow"
-  - [ ] Ao clicar nesse botão, deve-se enviar uma requisição pro servidor, para seguir/desseguir a pessoa
-  - [ ] Enquanto a requisição não volta, o botão deve ficar desabilitado
-  - [ ] Em caso de sucesso, o botão deve alternar de Follow para Unfollow e vice-versa
-  - [ ] Em caso de falha, deve-se exibir um alerta pro usuário indicando que não foi possível executar a operação
-  - [ ] Para saber inicialmente se o usuário já segue ou não uma pessoa, você pode pegar a lista de usuários seguidos através da API. O botão de Follow/Unfollow deve iniciar no estado correspondente.
+  - [x] Ao entrar na página de perfil de uma pessoa (que não seja o próprio usuário logado), deve existir agora um botão "Follow" / "Unfollow"
+  - [x] Ao clicar nesse botão, deve-se enviar uma requisição pro servidor, para seguir/desseguir a pessoa
+  - [x] Enquanto a requisição não volta, o botão deve ficar desabilitado
+  - [x] Em caso de sucesso, o botão deve alternar de Follow para Unfollow e vice-versa
+  - [x] Em caso de falha, deve-se exibir um alerta pro usuário indicando que não foi possível executar a operação
+  - [x] Para saber inicialmente se o usuário já segue ou não uma pessoa, você pode pegar a lista de usuários seguidos através da API. O botão de Follow/Unfollow deve iniciar no estado correspondente.
 
 - Busca de perfis
 

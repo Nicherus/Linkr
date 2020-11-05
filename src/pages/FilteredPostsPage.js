@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -20,6 +20,14 @@ export default function FilteredPostsPage() {
   const [offset, setOffset] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [isMyPosts, setIsMyPosts] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [userFollows, setUserFollows] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    fetchUserFollows();
+    followUnfollow();  
+  }, [])
 
   const fetchPosts = () => {
     if (params.id) {
@@ -31,6 +39,25 @@ export default function FilteredPostsPage() {
     } else {
       setIsMyPosts(true);
       fetchPostsByUser(true);
+    }
+  };
+
+  const fetchUserFollows = async () => {
+    try {
+      const { data } = await axios.get(
+        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/follows`,
+        {
+          headers: {
+            "user-token": `${token}`,
+          },
+        }
+      );
+      if(data){
+        setUserFollows(data.users);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Houve uma falha ao pegar sua lista de follows, tente novamente mais tarde");
     }
   };
 
@@ -99,19 +126,79 @@ export default function FilteredPostsPage() {
     }
   };
 
+  const followUnfollow = () => {
+    userFollows.forEach(element => {
+      if(element.id == params.id){
+        setIsFollowing(true);
+      }
+    });
+  }
+
+  const followUser = async () => {
+    setIsLoading(true);
+    try {
+      const { data } = await axios.post(
+        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${params.id}/follow`, null,
+        {
+          headers: {
+            "user-token": `${token}`,
+          },
+        }
+      );
+      if (data) {
+        setIsFollowing(true);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Houve uma falha ao tentar seguir este usuário, tente novamente mais tarde");
+    }
+    setIsLoading(false);
+  };
+
+  const unfollowUser = async () => {
+    setIsLoading(true);
+    try {
+      const { data } = await axios.post(
+        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${params.id}/unfollow`, null,
+        {
+          headers: {
+            "user-token": `${token}`,
+          },
+        }
+      );
+      if (data) {
+        setIsFollowing(false);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Houve uma falha ao tentar de parar de seguir este usuário, tente novamente mais tarde");
+    }
+    setIsLoading(false);
+  };
+
+
   return (
     <>
       <Header />
       <MainContainer>
-        <MainTitle>
-          {isMyPosts
-            ? "My Posts"
-            : params.hashtag
-            ? `#${params.hashtag}`
-            : pathname == "/my-likes"
-            ? "My Likes"
-            : `${state && state.userName}'s posts`}
-        </MainTitle>
+        <TitleContainer>
+          <MainTitle>
+            {isMyPosts
+              ? "My Posts"
+              : params.hashtag
+              ? `#${params.hashtag}`
+              : pathname == "/my-likes"
+              ? "My Likes"
+              : `${state && state.userName}'s posts`}
+          </MainTitle>
+          {( state && state.userName)?
+            <Button
+             onClick={() => isLoading? null : (isFollowing? unfollowUser() : followUser())} 
+            >{isFollowing?'unfollow':'follow'}</Button>
+          :
+            null
+          }
+        </TitleContainer>
         <ContentContainer>
           <PostsSectionContainer>
             <InfiniteScroll
@@ -152,10 +239,20 @@ const MainTitle = styled.h1`
   font-weight: 700;
   font-size: 43px;
   color: white;
+`;
+
+const TitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
   padding: 53px 0;
   @media (max-width: 768px) {
+    width: 100%;
     font-size: 33px;
-    padding: 20px 0;
+    padding: 20px 10px;
+    flex-wrap: wrap-reverse;
+  }
+  @media (max-width: 465px) {
+    justify-content: center;
   }
 `;
 
@@ -171,5 +268,22 @@ const PostsSectionContainer = styled.section`
   align-items: center;
   @media (max-width: 768px) {
     width: 100%;
+  }
+`;
+
+const Button = styled.button`
+  width: 150px;
+  background: var(--buttonBlue);
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 10px 5px;
+  color: white;
+  font-size: 22px;
+  font-family: var(--fontOswald);
+  font-weight: 700;
+  cursor: pointer;
+  @media (max-width: 768px) {
+    font-size: 22px;
   }
 `;
