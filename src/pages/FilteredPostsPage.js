@@ -12,7 +12,7 @@ import SinglePost from "../components/TimeLinePage/SinglePost";
 import Spinner from "../components/common/Spinner";
 
 export default function FilteredPostsPage() {
-  const { user, token } = useContext(UserContext);
+  const { user, token, fetchUserFollows, userFollows } = useContext(UserContext);
   const { state, pathname } = useLocation();
   const params = useParams();
 
@@ -21,7 +21,6 @@ export default function FilteredPostsPage() {
   const [hasMore, setHasMore] = useState(true);
   const [isMyPosts, setIsMyPosts] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
-  const [userFollows, setUserFollows] = useState([]);
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
@@ -42,24 +41,6 @@ export default function FilteredPostsPage() {
     }
   };
 
-  const fetchUserFollows = async () => {
-    try {
-      const { data } = await axios.get(
-        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/follows`,
-        {
-          headers: {
-            "user-token": `${token}`,
-          },
-        }
-      );
-      if(data){
-        setUserFollows(data.users);
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Houve uma falha ao pegar sua lista de follows, tente novamente mais tarde");
-    }
-  };
 
   const fetchPostsByUser = async (userPost) => {
     try {
@@ -193,7 +174,9 @@ export default function FilteredPostsPage() {
           </MainTitle>
           {( state && state.userName)?
             <Button
-             onClick={() => isLoading? null : (isFollowing? unfollowUser() : followUser())} 
+              onClick={() => isLoading? null : (isFollowing? unfollowUser() : followUser())} 
+              backgroundColor={!isFollowing? 'var(--buttonBlue)' : 'white'}
+              color={!isFollowing? 'white' : 'var(--buttonBlue)'}
             >{isFollowing?'unfollow':'follow'}</Button>
           :
             null
@@ -273,12 +256,12 @@ const PostsSectionContainer = styled.section`
 
 const Button = styled.button`
   width: 150px;
-  background: var(--buttonBlue);
+  background: ${props => props.backgroundColor};
   border: none;
   outline: none;
   border-radius: 5px;
   padding: 10px 5px;
-  color: white;
+  color: ${props => props.color};
   font-size: 22px;
   font-family: var(--fontOswald);
   font-weight: 700;
