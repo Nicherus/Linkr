@@ -13,12 +13,10 @@ export default function SearchUserBar() {
 
   const [showSearchList, setShowSearchList] = useState(true);
   const [searchList, setSearchList] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
 
   const toggleSearchList = () => {
-    // setShowSearchList(!showSearchList);
-    setShowSearchList(true);
+    setShowSearchList(!showSearchList);
   };
 
 
@@ -52,7 +50,6 @@ export default function SearchUserBar() {
             type="text"
             onChange={(e) => searchUsers(e.target.value)}
             onClick={() => toggleSearchList()}
-            disabled={isLoading}
           />
           <IoIosSearch />
         </SearchBox>

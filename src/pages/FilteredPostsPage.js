@@ -82,7 +82,6 @@ export default function FilteredPostsPage() {
       setPosts((oldArray) => [...oldArray, ...data.posts]);
     } catch (error) {
       console.error(error);
-      alert("Houve uma falha ao obter os posts, por favor atualize a página");
     }
   };
 
@@ -103,7 +102,6 @@ export default function FilteredPostsPage() {
       setPosts((oldArray) => [...oldArray, ...data.posts]);
     } catch (error) {
       console.error(error);
-      alert("Houve uma falha ao obter os posts, por favor atualize a página");
     }
   };
 
@@ -131,7 +129,7 @@ export default function FilteredPostsPage() {
       }
     } catch (error) {
       console.error(error);
-      alert("Houve uma falha ao tentar seguir este usuário, tente novamente mais tarde");
+      alert("Something happened while trying to follow this user, please try again later");
     }
     setIsLoading(false);
   };
@@ -152,7 +150,7 @@ export default function FilteredPostsPage() {
       }
     } catch (error) {
       console.error(error);
-      alert("Houve uma falha ao tentar de parar de seguir este usuário, tente novamente mais tarde");
+      alert("Something happened while trying to unfollow this user, please try again layter");
     }
     setIsLoading(false);
   };
@@ -190,7 +188,7 @@ export default function FilteredPostsPage() {
               hasMore={hasMore}
             >
               {posts.length === 0
-                ? "Nenhum post encontrado"
+                ? "No posts found"
                 : posts.map((post) => <SinglePost key={post.id} post={post} />)}
             </InfiniteScroll>
           </PostsSectionContainer>

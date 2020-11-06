@@ -28,6 +28,10 @@ export default function Header() {
     });
   };
 
+  const goToExplore = () => {
+    history.push("/explore");
+  };
+
   const logout = () => {
     history.push("/");
     clearData();
@@ -53,6 +57,7 @@ export default function Header() {
         <MenuOptions show={showMenu}>
           <Link onClick={() => goToMyPosts()}>My posts</Link>
           <Link onClick={() => goToMyLikes()}>My likes</Link>
+          <Link onClick={() => goToExplore()}>Explore</Link>
           <Link onClick={() => logout()}>Logout</Link>
         </MenuOptions>
       </HeaderMenu>

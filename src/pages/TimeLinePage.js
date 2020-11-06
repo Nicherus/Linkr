@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroller";
@@ -14,65 +14,70 @@ import Spinner from "../components/common/Spinner";
 export default function TimeLinePage() {
   const { user, token, fetchUserFollows, userFollows } = useContext(UserContext);
   const history = useHistory();
+  const { pathname } = useLocation();
 
   const [posts, setPosts] = useState([]);
   const [offset, setOffset] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [refresh, setRefresh] = useState(false);
+  const [isExploring] = useState(pathname == "/explore");
 
   useEffect(() => {
-
     const interval = setInterval(() => {
       setPosts([]);
       setOffset(0);
+      fetchPosts();
       setRefresh(false);
     }, 15000)
 
     if (refresh) {
       setPosts([]);
-      setOffset(0)
+      setOffset(0);
+      fetchPosts();
       setRefresh(false);
-    }
-
-    if (!token) {
-      history.push("/");
     }
 
     return () => clearInterval(interval);
   }, [refresh]);
 
   useEffect(() => {
-    fetchUserFollows();
+    if (!token) {
+      history.push("/");
+    }
   }, [])
 
   const fetchPosts = () => {
-    fetchPostsTimeline();
+    fetchUserFollows();
+    if(isExploring){
+      fetchPostsExplore();
+    } else{
+      fetchPostsTimeline();
+    }
   }
 
-  // const fetchPostsTimeline = async () => {
-  //   if (refresh) {
-  //     setOffset(0);
-  //     setRefresh(false);
-  //   }
-  //   try {
-  //     const { data } = await axios.get(
-  //       `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts?offset=${offset}&limit=10`,
-  //       {
-  //         headers: {
-  //           "user-token": `${token}`,
-  //         },
-  //       }
-  //     );
-  //     if (data.posts.length === 0) {
-  //       setHasMore(false);
-  //     }
-  //     setOffset(offset + 10);
-  //     setPosts((oldArray) => [...oldArray, ...data.posts]);
-  //   } catch (error) {
-  //     console.error(error);
-  //     alert("Houve uma falha ao obter os posts, por favor atualize a página");
-  //   }
-  // };
+  const fetchPostsExplore = async () => {
+    if (refresh) {
+      setOffset(0);
+      setRefresh(false);
+    }
+    try {
+      const { data } = await axios.get(
+        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts?offset=${offset}&limit=10`,
+        {
+          headers: {
+            "user-token": `${token}`,
+          },
+        }
+      );
+      if (data.posts.length === 0) {
+        setHasMore(false);
+      }
+      setOffset(offset + 10);
+      setPosts((oldArray) => [...oldArray, ...data.posts]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const fetchPostsTimeline = async () => {
     if (refresh) {
@@ -95,7 +100,6 @@ export default function TimeLinePage() {
       setPosts((oldArray) => [...oldArray, ...data.posts]);
     } catch (error) {
       console.error(error);
-      alert("Houve uma falha ao obter os posts, por favor atualize a página");
     }
   };
 
@@ -115,12 +119,12 @@ export default function TimeLinePage() {
               <Spinner />
             ) : (
               <InfiniteScroll
-                loadMore={fetchPostsTimeline}
+                loadMore={fetchPosts}
                 loader={<Spinner />}
                 hasMore={hasMore}
               >
                 {posts.length === 0
-                  ? (userFollows.length > 0)? 'Nenhuma publicação encontrada' : 'Você não segue ninguém ainda, procure por perfis na busca ou na aba explorando c:'
+                  ? (userFollows.length > 0)? 'No posts found' : "You don't follow anyone yet, search for profiles using the search bar or use the explore option inside the top right menu :)"
                   : posts.map((post) => (
                       <SinglePost
                         key={post.id}

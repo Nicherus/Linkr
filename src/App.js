@@ -26,6 +26,7 @@ function App() {
               <Switch location={location}>
                 <Route path="/" exact component={LoginPage} />
                 <Route path="/timeline" component={TimeLinePage} />
+                <Route path="/explore" component={TimeLinePage} />
                 <Route path="/my-posts" component={FilteredPostsPage} />
                 <Route path="/my-likes" component={FilteredPostsPage} />
                 <Route path="/hashtag/:hashtag" component={FilteredPostsPage} />
