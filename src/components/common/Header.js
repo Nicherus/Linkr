@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import SearchUserBar from './SearchUsersBar'
 
 export default function Header() {
   const { user, clearData } = useContext(UserContext);
@@ -37,6 +38,7 @@ export default function Header() {
       <Link to="/timeline">
         <LogoTitle>linkr</LogoTitle>
       </Link>
+      <SearchUserBar />
       <HeaderMenu>
         {showMenu ? (
           <Button onClick={() => toggleMenu()}>
@@ -61,7 +63,6 @@ export default function Header() {
 const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
   position: fixed;
   top: 0;
   left: 0;

@@ -158,6 +158,7 @@ const ProfilePicture = styled.img`
   width: 50px;
   border-radius: 50%;
   margin-right: 15px;
+  object-fit: cover;
   @media (max-width: 768px) {
     display: none;
   }

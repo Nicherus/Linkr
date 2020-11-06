@@ -144,21 +144,21 @@
 
 - Busca de perfis
 
-  - [ ] Agora no topo do site deve ser exibida uma caixa de busca, seguindo layout
-  - [ ] A cada letra digitada na busca, deve ser disparada uma busca no servidor e os resultados devem ser exibidos conforme layout
-  - [ ] A busca só deve ser disparada quando o usuário digitou pelo menos 3 caracteres e esperando o usuário ficar sem digitar por pelo menos 300ms.
+  - [x] Agora no topo do site deve ser exibida uma caixa de busca, seguindo layout
+  - [x] A cada letra digitada na busca, deve ser disparada uma busca no servidor e os resultados devem ser exibidos conforme layout
+  - [x] A busca só deve ser disparada quando o usuário digitou pelo menos 3 caracteres e esperando o usuário ficar sem digitar por pelo menos 300ms.
 
     **Dica**: essa técnica se chama debounce, tem uma lib que pode te ajudar: **react-debounce-input**
 
   - [ ] Ao exibir os resultados, deve-se mostrar no topo os usuários que você já segue, com a indicação de "following" seguindo layout. Esse tratamento deve ser feito no front, o servidor não responderá de forma ordenada
-  - [ ] Ao clicar em um resultado, deve-se redirecionar o usuário para a página de perfil daquele usuário
+  - [x] Ao clicar em um resultado, deve-se redirecionar o usuário para a página de perfil daquele usuário
 
 - Nova timeline
 
-  - [ ] Na página de timeline (rota "/timeline"), agora devem aparecer somente os posts das pessoas que você segue e não mais todo mundo. Utilize a nova rota na API para esse fim.
-  - [ ] Caso o usuário não siga ninguém ainda, deve aparecer no lugar dos posts uma mensagem dizendo "Você não segue ninguém ainda, procure por perfis na busca"
-  - [ ] Caso o usuário já siga pessoas, mas elas não tenham postado nada, deve aparecer no lugar dos posts uma mensagem dizendo "Nenhuma publicação encontrada"
-  - [ ] Agora, na página de timeline, os posts devem ser recarregados do servidor a cada 15 segundos e atualizados em tela
+  - [x] Na página de timeline (rota "/timeline"), agora devem aparecer somente os posts das pessoas que você segue e não mais todo mundo. Utilize a nova rota na API para esse fim.
+  - [x] Caso o usuário não siga ninguém ainda, deve aparecer no lugar dos posts uma mensagem dizendo "Você não segue ninguém ainda, procure por perfis na busca"
+  - [x] Caso o usuário já siga pessoas, mas elas não tenham postado nada, deve aparecer no lugar dos posts uma mensagem dizendo "Nenhuma publicação encontrada"
+  - [x] Agora, na página de timeline, os posts devem ser recarregados do servidor a cada 15 segundos e atualizados em tela
 
     **Dica**: Pesquise sobre como utilizar setInterval em um componente React. Pesquise sobre como funciona o retorno da função passada pra useEffect e como você pode utilizá-la junto do clearInterval do JS
 

@@ -12,7 +12,7 @@ import SinglePost from "../components/TimeLinePage/SinglePost";
 import Spinner from "../components/common/Spinner";
 
 export default function TimeLinePage() {
-  const { user, token } = useContext(UserContext);
+  const { user, token, fetchUserFollows, userFollows } = useContext(UserContext);
   const history = useHistory();
 
   const [posts, setPosts] = useState([]);
@@ -21,14 +21,58 @@ export default function TimeLinePage() {
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
+
+    const interval = setInterval(() => {
+      setPosts([]);
+      setOffset(0);
+      setRefresh(false);
+    }, 15000)
+
     if (refresh) {
       setPosts([]);
-      setTimeout(fetchPostsTimeline(), 2000);
+      setOffset(0)
+      setRefresh(false);
     }
+
     if (!token) {
       history.push("/");
     }
+
+    return () => clearInterval(interval);
   }, [refresh]);
+
+  useEffect(() => {
+    fetchUserFollows();
+  }, [])
+
+  const fetchPosts = () => {
+    fetchPostsTimeline();
+  }
+
+  // const fetchPostsTimeline = async () => {
+  //   if (refresh) {
+  //     setOffset(0);
+  //     setRefresh(false);
+  //   }
+  //   try {
+  //     const { data } = await axios.get(
+  //       `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts?offset=${offset}&limit=10`,
+  //       {
+  //         headers: {
+  //           "user-token": `${token}`,
+  //         },
+  //       }
+  //     );
+  //     if (data.posts.length === 0) {
+  //       setHasMore(false);
+  //     }
+  //     setOffset(offset + 10);
+  //     setPosts((oldArray) => [...oldArray, ...data.posts]);
+  //   } catch (error) {
+  //     console.error(error);
+  //     alert("Houve uma falha ao obter os posts, por favor atualize a página");
+  //   }
+  // };
 
   const fetchPostsTimeline = async () => {
     if (refresh) {
@@ -37,7 +81,7 @@ export default function TimeLinePage() {
     }
     try {
       const { data } = await axios.get(
-        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts?offset=${offset}&limit=10`,
+        `https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/following/posts?offset=${offset}&limit=10`,
         {
           headers: {
             "user-token": `${token}`,
@@ -76,7 +120,7 @@ export default function TimeLinePage() {
                 hasMore={hasMore}
               >
                 {posts.length === 0
-                  ? "Nenhum post encontrado"
+                  ? (userFollows.length > 0)? 'Nenhuma publicação encontrada' : 'Você não segue ninguém ainda, procure por perfis na busca ou na aba explorando c:'
                   : posts.map((post) => (
                       <SinglePost
                         key={post.id}
