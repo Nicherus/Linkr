@@ -17,7 +17,7 @@ export default function Form({ formState, handleChangeFormState }) {
   const sendLoginInfo = async (e) => {
     e.preventDefault();
     if (email.length === 0 || password.length === 0) {
-      alert("Preencha todos os campos");
+      alert("Fill in all the fields");
       return;
     }
     setLoading(true);
@@ -43,7 +43,7 @@ export default function Form({ formState, handleChangeFormState }) {
       username.length === 0 ||
       pictureUrl === 0
     ) {
-      alert("Preencha todos os campos");
+      alert("Fill in all the fields");
       return;
     }
     setLoading(true);

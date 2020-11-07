@@ -33,7 +33,7 @@ export default function HashtagsContainer({ token }) {
         searchTag();
         setSearch('');
       } else{
-        alert('Preencha o campo para procurar por uma hashtag')
+        alert('Type something to search for a hashtag')
       }
     }
   };

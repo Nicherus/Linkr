@@ -38,11 +38,11 @@ export default function Modal({
       ) : (
         <>
           <ModalTitle>
-            Tem certeza que deseja excluir essa publicacao?
+            Are you sure you want to delete this post?
           </ModalTitle>
           <ButtonsContainer>
             <CancelButton onClick={() => setIsModalOpen(!isModalOpen)}>
-              Nao, voltar
+              No, go back
             </CancelButton>
             <ConfirmButton onClick={handleDelete}>Sim, excluir</ConfirmButton>
           </ButtonsContainer>

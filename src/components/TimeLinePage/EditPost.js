@@ -40,7 +40,6 @@ export default function EditPost({
         setIsEdit(!isEdit);
       } catch (error) {
         console.error(error);
-        alert("Não foi possível salvar as alterações");
         setIsLoading(false);
       }
     }
